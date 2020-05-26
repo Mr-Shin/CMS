@@ -20,6 +20,7 @@
                         echo "<li> <a href=\"#\">{$row['name']}</a></li>";
                     }
                 ?>
+                <li><a href="#">Admin</a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
