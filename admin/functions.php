@@ -1,5 +1,10 @@
 <?php
-
+function queryResult($result){
+    global $connection;
+    if (!$result){
+        die("Query Failed. ".mysqli_error($connection));
+    }
+}
 function addCategory(){
     global $connection;
     if (isset($_POST['submit'])){

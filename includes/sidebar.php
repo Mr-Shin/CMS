@@ -29,7 +29,7 @@
                 <ul class="list-unstyled">
                     <?php
                     while ($row = mysqli_fetch_assoc($items)){
-                        echo "<li> <a href=\"#\">{$row['name']}</a></li>";
+                        echo "<li> <a href=\"category.php?id={$row['id']}\">{$row['title']}</a></li>";
                     }
                     ?>
                 </ul>

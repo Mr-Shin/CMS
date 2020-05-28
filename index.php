@@ -16,11 +16,12 @@
                     $query= "SELECT * FROM posts";
                     $select_posts = mysqli_query($connection,$query);
                     while ($row = mysqli_fetch_assoc($select_posts)){
+                        $post_id = $row['id'];
                         $post_title = $row['title'];
                         $post_date = date('F d, Y',strtotime($row['date']));
                         $post_image = $row['image'];
                         $post_author = $row['author'];
-                        $post_content = $row['content'];
+                        $post_content =substr($row['content'],0,100);
                         echo <<<EOT
   <h1 class="page-header">
                     Page Heading
@@ -29,17 +30,17 @@
 
                 <!-- First Blog Post -->
                 <h2>
-                    <a href="#">{$post_title}</a>
+                    <a href="post.php?id={$post_id}">{$post_title}</a>
                 </h2>
                 <p class="lead">
                     by <a href="index.php">{$post_author}</a>
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> Posted on {$post_date}</p>
                 <hr>
-                <img class="img-responsive" src="{$post_image}" alt="">
+                <img class="img-responsive" src="images/{$post_image}" alt="">
                 <hr>
                 <p>{$post_content}</p>
-                <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                <a class="btn btn-primary" href="post.php?id={$post_id}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
                 <hr>
 EOT;
