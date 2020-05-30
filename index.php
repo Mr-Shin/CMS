@@ -13,8 +13,11 @@
             <!-- Blog Entries Column -->
             <div class="col-md-8">
                 <?php
-                    $query= "SELECT * FROM posts";
+                    $query= "SELECT * FROM posts WHERE status = 'published'";
                     $select_posts = mysqli_query($connection,$query);
+                    if (mysqli_num_rows($select_posts) == 0){
+                        echo "<h1 class='text-center'>No published posts available.</h1>";
+                    }
                     while ($row = mysqli_fetch_assoc($select_posts)){
                         $post_id = $row['id'];
                         $post_title = $row['title'];
@@ -48,16 +51,6 @@ EOT;
                     }
                 ?>
 
-
-                <!-- Pager -->
-                <ul class="pager">
-                    <li class="previous">
-                        <a href="#">&larr; Older</a>
-                    </li>
-                    <li class="next">
-                        <a href="#">Newer &rarr;</a>
-                    </li>
-                </ul>
 
             </div>
 

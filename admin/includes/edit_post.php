@@ -93,9 +93,8 @@
     <div class="form-group">
         <label for="status">Status</label>
         <select id="status" name="status">
-            <option value="draft">Post Status</option>
-            <option value="published">Published</option>
-            <option value="draft">Draft</option>
+            <option value="Published">Published</option>
+            <option value="Draft">Draft</option>
         </select>
     </div>
 

@@ -8,7 +8,6 @@
             <th>Category</th>
             <th>Status</th>
             <th>Image</th>
-            <th>Comments</th>
             <th>Date</th>
         </tr>
 
@@ -40,18 +39,8 @@ while ($row = mysqli_fetch_assoc($select_posts)) {
                                         }
                                         echo <<<EOT
                                         </td>
-                                        <td style="vertical-align: middle;"> 
-                                        EOT;
-                                        if ($post_status==0){
-                                            echo "Drafted";
-                                        }
-                                        else{
-                                            echo "Published";
-                                        }
-                                        echo <<<EOT
-                                    </td>
+                                        <td style="vertical-align: middle;">{$post_status}</td>
                                         <td style="vertical-align: middle"><img width="150px" src="../images/{$post_image}" alt=""></td>
-                                        <td style="vertical-align: middle">333</td>
                                         <td style="vertical-align: middle">{$post_date}</td>
                                         <td style="vertical-align: middle"><a class="btn btn-info" href="posts.php?p=edit-post&id=$post_id">Edit</a></td>
                                         <td style="vertical-align: middle"><a class="btn btn-danger" href="posts.php?del=$post_id">Delete</a></td>

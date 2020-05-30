@@ -1,5 +1,6 @@
 <?php include "includes/db.php"?>
 <?php include "includes/header.php"?>
+<?php include "admin/functions.php"?>
 <body>
 
 <!-- Navigation -->
@@ -59,15 +60,37 @@ EOT;
     </div>
     <!-- /.row -->
     <!-- Blog Comments -->
+    <?php
+        if (isset($_POST['create_comment'])){
+            $id= $_GET['id'];
+            $comment_author = $_POST['comment_author'];
+            $comment_email = $_POST['comment_email'];
+            $comment_content = $_POST['comment_content'];
+            $comment_date = date("Y-m-d h:i:sa");
+            $query = "INSERT INTO comments (post_id, author, email, content, status, date)
+                  VALUES ({$id},'{$comment_author}','{$comment_email}','{$comment_content}', 'Unapproved', '{$comment_date}')";
+            $res = mysqli_query($connection, $query);
+            queryResult($res);
+        }
 
+    ?>
     <!-- Comments Form -->
     <div class="well">
         <h4>Leave a Comment:</h4>
-        <form role="form">
+        <form action="" method="post" role="form">
             <div class="form-group">
-                <textarea class="form-control" rows="3"></textarea>
+                <label for="comment_author">Author</label>
+                <input type="text" class="form-control" name="comment_author">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="form-group">
+                <label for="comment_email">Email</label>
+                <input type="text" class="form-control" name="comment_email">
+            </div>
+            <div class="form-group">
+                <label for="comment_content">Comment</label>
+                <textarea name="comment_content" class="form-control" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" name="create_comment">Submit</button>
         </form>
     </div>
 
@@ -76,43 +99,59 @@ EOT;
     <!-- Posted Comments -->
 
     <!-- Comment -->
+    <?php
+        $post_id = $_GET['id'];
+        $comments_query = "SELECT * from comments WHERE post_id = {$post_id} AND status ='Approved'";
+        $result = mysqli_query($connection, $comments_query);
+        while ($row = mysqli_fetch_assoc($result)){
+            $comment_author = $row['author'];
+            $comment_date = $row['date'];
+            $comment_content = $row['content'];
+            echo <<<EOT
     <div class="media">
         <a class="pull-left" href="#">
             <img class="media-object" src="http://placehold.it/64x64" alt="">
         </a>
         <div class="media-body">
-            <h4 class="media-heading">Start Bootstrap
-                <small>August 25, 2014 at 9:30 PM</small>
+            <h4 class="media-heading">{$comment_author}
+                <small>{$comment_date}</small>
             </h4>
-            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+            {$comment_content}
         </div>
     </div>
-
-    <!-- Comment -->
-    <div class="media">
-        <a class="pull-left" href="#">
-            <img class="media-object" src="http://placehold.it/64x64" alt="">
-        </a>
-        <div class="media-body">
-            <h4 class="media-heading">Start Bootstrap
-                <small>August 25, 2014 at 9:30 PM</small>
-            </h4>
-            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-            <!-- Nested Comment -->
-            <div class="media">
-                <a class="pull-left" href="#">
-                    <img class="media-object" src="http://placehold.it/64x64" alt="">
-                </a>
-                <div class="media-body">
-                    <h4 class="media-heading">Nested Start Bootstrap
-                        <small>August 25, 2014 at 9:30 PM</small>
-                    </h4>
-                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                </div>
-            </div>
-            <!-- End Nested Comment -->
-        </div>
     <hr>
+
+EOT;
+        }
+
+
+    ?>
+
+
+<!--    <! Comment -->
+<!--    <div class="media">-->
+<!--        <a class="pull-left" href="#">-->
+<!--            <img class="media-object" src="http://placehold.it/64x64" alt="">-->
+<!--        </a>-->
+<!--        <div class="media-body">-->
+<!--            <h4 class="media-heading">Start Bootstrap-->
+<!--                <small>August 25, 2014 at 9:30 PM</small>-->
+<!--            </h4>-->
+<!--            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.-->
+<!--            <!- Nested Comment -->
+<!--            <div class="media">-->
+<!--                <a class="pull-left" href="#">-->
+<!--                    <img class="media-object" src="http://placehold.it/64x64" alt="">-->
+<!--                </a>-->
+<!--                <div class="media-body">-->
+<!--                    <h4 class="media-heading">Nested Start Bootstrap-->
+<!--                        <small>August 25, 2014 at 9:30 PM</small>-->
+<!--                    </h4>-->
+<!--                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <!- End Nested Comment -->
+<!--        </div>-->
 
     <!-- Footer -->
     <footer>
