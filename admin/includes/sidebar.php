@@ -18,16 +18,16 @@
             <a href="categories.php"><i class="fa fa-fw fa-wrench"></i> Categories</a>
         </li>
         <li>
-            <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Comments</a>
+            <a href="comments.php"><i class="fa fa-fw fa-wrench"></i> Comments</a>
         </li>
         <li>
             <a href="javascript:;" data-toggle="collapse" data-target="#users-dropdown"><i class="fa fa-fw fa-arrows-v"></i> Users <i class="fa fa-fw fa-caret-down"></i></a>
             <ul id="users-dropdown" class="collapse">
                 <li>
-                    <a href="#">Dropdown Item</a>
+                    <a href="users.php">View All Users</a>
                 </li>
                 <li>
-                    <a href="#">Dropdown Item</a>
+                    <a href="users.php?p=add-user">Add User</a>
                 </li>
             </ul>
         </li>

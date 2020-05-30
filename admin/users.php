@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        Comments
+                        Users
                     </h1>
 
                     <?php
@@ -24,14 +24,14 @@
 
                     }
                     switch ($source){
-                        case 'add-post':
-                            include "includes/add_post.php";
+                        case 'add-user':
+                            include "includes/add_user.php";
                             break;
-                        case 'edit-post':
-                            include "includes/edit_post.php";
+                        case 'edit-user':
+                            include "includes/edit_user.php";
                             break;
                         default:
-                            include "includes/view_all_comments.php";
+                            include "includes/view_all_users.php";
 
                     }
                     ?>
