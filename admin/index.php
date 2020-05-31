@@ -14,8 +14,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Welcome to the dashboard.
-                            <small>John Smith</small>
+                            Welcome to the dashboard
+                            <?php echo $_SESSION['firstname'] ?>.
                         </h1>
                         <ol class="breadcrumb">
                             <li>
