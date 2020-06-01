@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3d69f58a-056b-4c32-8a7b-10a28c889b41" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/functions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/includes/nav.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/includes/nav.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/admin/js/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/includes/add_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/includes/add_user.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/includes/edit_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/includes/edit_user.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/profile.php" afterDir="false" />
     </list>
     <list id="88e650f7-35ad-4233-8c8c-5354af062bdf" name="Bulk Delete Posts, Success Message For Some CRUDs , Add Post Link to Posts Page And Comment Validation." comment="" />
     <list id="7c03bfdf-47be-436d-ae71-d21291d2cd44" name="Post CRUD and category page" comment="" />
@@ -56,11 +55,38 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/functions.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="276">
               <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/includes/add_user.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="138">
+              <caret line="6" column="35" lean-forward="true" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/includes/edit_user.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="54" column="31" lean-forward="true" selection-start-line="54" selection-end-line="55" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/admin/profile.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="84">
+              <caret line="42" column="42" lean-forward="true" selection-start-line="42" selection-start-column="42" selection-end-line="42" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -95,6 +121,8 @@
       <find>autho</find>
       <find>session_start</find>
       <find>author</find>
+      <find>$user_id</find>
+      <find>role</find>
     </findStrings>
     <replaceStrings>
       <replace>comment_</replace>
@@ -117,13 +145,11 @@
         <option value="$PROJECT_DIR$/admin/posts/view-posts.php" />
         <option value="$USER_HOME$/AppData/Local/Temp/Rar$DIa17372.43765/add_post.php" />
         <option value="$PROJECT_DIR$/admin/includes/sidebar.php" />
-        <option value="$PROJECT_DIR$/admin/includes/add_user.php" />
         <option value="$PROJECT_DIR$/includes/nav.php" />
         <option value="$PROJECT_DIR$/includes/login.php" />
         <option value="$PROJECT_DIR$/includes/header.php" />
         <option value="$PROJECT_DIR$/registration.php" />
         <option value="$PROJECT_DIR$/includes/sidebar.php" />
-        <option value="$PROJECT_DIR$/admin/includes/edit_user.php" />
         <option value="$PROJECT_DIR$/admin/includes/edit_post.php" />
         <option value="$PROJECT_DIR$/admin/includes/add_post.php" />
         <option value="$PROJECT_DIR$/author_posts.php" />
@@ -134,7 +160,6 @@
         <option value="$PROJECT_DIR$/admin/includes/footer.php" />
         <option value="$PROJECT_DIR$/admin/posts.php" />
         <option value="$PROJECT_DIR$/admin/users.php" />
-        <option value="$PROJECT_DIR$/admin/profile.php" />
         <option value="$PROJECT_DIR$/includes/logout.php" />
         <option value="$PROJECT_DIR$/admin/includes/header.php" />
         <option value="$PROJECT_DIR$/admin/includes/view_all_users.php" />
@@ -145,13 +170,16 @@
         <option value="$PROJECT_DIR$/admin/js/script.js" />
         <option value="$PROJECT_DIR$/admin/includes/nav.php" />
         <option value="$PROJECT_DIR$/admin/functions.php" />
+        <option value="$PROJECT_DIR$/admin/includes/add_user.php" />
+        <option value="$PROJECT_DIR$/admin/includes/edit_user.php" />
+        <option value="$PROJECT_DIR$/admin/profile.php" />
       </list>
     </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.3" />
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-75" />
-    <option name="y" value="-18" />
+    <option name="x" value="-158" />
+    <option name="y" value="360" />
     <option name="width" value="1725" />
     <option name="height" value="905" />
   </component>
@@ -255,7 +283,7 @@
       <workItem from="1590577123075" duration="30614000" />
       <workItem from="1590778246300" duration="59189000" />
       <workItem from="1591024079716" duration="362000" />
-      <workItem from="1591024873443" duration="6761000" />
+      <workItem from="1591024873443" duration="8660000" />
     </task>
     <task id="LOCAL-00001" summary="Category CRUD">
       <created>1590524498848</created>
@@ -268,7 +296,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="123110000" />
+    <option name="totallyTimeSpent" value="125009000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -283,7 +311,7 @@
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.3986111" visible="true" weight="0.17114094" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.3986111" visible="true" weight="0.17114094" />
       <window_info id="Structure" order="1" sideWeight="0.6013889" side_tool="true" weight="0.1295302" />
       <window_info id="Favorites" order="2" sideWeight="0.50328946" side_tool="true" weight="0.3460465" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -295,7 +323,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49932885" weight="0.32777777" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49932885" visible="true" weight="0.425" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.49932885" visible="true" weight="0.425" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50067115" side_tool="true" weight="0.9361111" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.32916668" />
       <window_info anchor="bottom" id="PHP-CGI Server" order="12" weight="0.32916668" />
@@ -483,24 +511,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/includes/add_user.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/includes/nav.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="457">
           <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/includes/edit_user.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="73" column="67" selection-start-line="73" selection-start-column="67" selection-end-line="73" selection-end-column="67" />
         </state>
       </provider>
     </entry>
@@ -586,13 +600,6 @@
           <folding>
             <element signature="e#2357#2363#0#HTML" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/profile.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="521">
-          <caret line="130" column="38" selection-start-line="130" selection-start-column="38" selection-end-line="130" selection-end-column="38" />
         </state>
       </provider>
     </entry>
@@ -719,6 +726,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
           <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/includes/add_user.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="6" column="35" lean-forward="true" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/includes/edit_user.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="54" column="31" lean-forward="true" selection-start-line="54" selection-end-line="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/profile.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="42" column="42" lean-forward="true" selection-start-line="42" selection-start-column="42" selection-end-line="42" selection-end-column="42" />
         </state>
       </provider>
     </entry>

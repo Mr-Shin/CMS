@@ -9,11 +9,14 @@ if (isset($_GET['id'])){
         $user_firstname = "{$row['firstname']}";
         $user_lastname = "{$row['lastname']}";
         $username = $row['username'];
-        $password = $row['password'];
+        $pass = $row['password'];
         $user_email = $row['email'];
         $user_image = $row['image'];
         $user_role = $row['role'];
     }
+}
+else{
+    header("Location: index.php");
 }
 
 if (isset($_POST['update_user'])){
@@ -21,8 +24,13 @@ if (isset($_POST['update_user'])){
     $lastname = $_POST['lastname'];
     $username = $_POST['username'];
     $email = $_POST['email'];
+    if (!empty($_POST['password'])){
     $password = $_POST['password'];
     $password = password_hash($password, PASSWORD_BCRYPT);
+    }
+    else{
+        $password = $pass;
+    }
 
 //    $image = $_FILES['image']['name'];
 //    $tmp_image = $_FILES['image']['tmp_name'];
@@ -42,7 +50,6 @@ if (isset($_POST['update_user'])){
     $query .="role= '{$role}' ";
 //    $query .="image  = '{$image}' ";
     $query .= "WHERE id = {$user_id} ";
-    echo $query;
     $res = mysqli_query($connection,$query);
     queryResult($res);
     header("Location: users.php");

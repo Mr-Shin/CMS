@@ -10,8 +10,7 @@ if (isset($_SESSION['username'])) {
         $user_firstname = $row['firstname'];
         $user_lastname = $row['lastname'];
         $user_email = $row['email'];
-        $password = $row['password'];
-        $user_role = $row['role'];
+        $pass = $row['password'];
     }
 }
 ?>
@@ -21,10 +20,15 @@ if (isset($_SESSION['username'])) {
         $lastname = $_SESSION['lastname'] = $_POST['lastname'];
         $username =  $_SESSION['username'] =$_POST['username'];
         $email = $_POST['email'];
-        $password = $_POST['password'];
+        if (!empty($_POST['password'])){
+            $password = $_POST['password'];
+            $password = password_hash($password, PASSWORD_BCRYPT);
+        }
+        else{
+                $password = $pass;
+        }
         //    $image = $_FILES['image']['name'];
         //    $tmp_image = $_FILES['image']['tmp_name'];
-        $role = $_POST['role'];
 
         //    move_uploaded_file($tmp_image,"../images/$image");
 
@@ -36,13 +40,13 @@ if (isset($_SESSION['username'])) {
         $query .="lastname  = '{$lastname}', ";
         $query .="username = '{$username}', ";
         $query .="email   =  '{$email}', ";
-        $query .="password = '{$password}', ";
-        $query .="role= '{$role}' ";
+        $query .="password = '{$password}' ";
         //    $query .="image  = '{$image}' ";
         $query .= "WHERE id = {$user_id} ";
-        echo $query;
         $res = mysqli_query($connection,$query);
         queryResult($res);
+        header("Location: users.php");
+
         }
 ?>
 <body>
@@ -82,30 +86,13 @@ if (isset($_SESSION['username'])) {
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" name="password" value="<?php echo $password?>">
+                            <input type="password" class="form-control" name="password">
                         </div>
                         <!--    <div class="form-group">-->
                         <!--        <label for="image">User Image</label>-->
                         <!--        <input type="file" name="image">-->
                         <!--    </div>-->
 
-                        <div class="form-group">
-                            <label for="role">Role</label>
-                            <select id="role" name="role">
-                                <?php
-                                echo "<option selected value='{$user_role}'>{$user_role}</option>";
-
-                                if ($user_role=="Admin") {
-                                    echo "<option value='Subscriber'>Subscriber</option>";
-
-                                }
-                                else{
-                                    echo "<option value='Admin'>Admin</option>";
-
-                                }
-                                ?>
-                            </select>
-                        </div>
 
 
 
