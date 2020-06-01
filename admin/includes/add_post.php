@@ -1,7 +1,7 @@
 <?php
 if (isset($_POST['create_post'])){
     $title = $_POST['title'];
-    $author = $_POST['author'];
+    $author = $_SESSION['firstname'] . " " . $_SESSION['lastname'];
     $category = $_POST['category_id'];
     $status = $_POST['status'];
     $image = $_FILES['image']['name'];
@@ -60,15 +60,10 @@ if (isset($_POST['create_post'])){
     </div>
 
     <div class="form-group">
-        <label for="author">Post Author</label>
-        <input type="text" class="form-control" name="author">
-    </div>
-
-    <div class="form-group">
         <label for="status">Status</label>
         <select id="status" name="status">
-            <option value="published">Published</option>
-            <option value="draft">Draft</option>
+            <option value="Published">Published</option>
+            <option value="Draft">Draft</option>
         </select>
     </div>
 

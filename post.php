@@ -14,7 +14,6 @@
         <!-- Blog Entries Column -->
         <div class="col-md-8">
             <?php
-            session_start();
             if (isset($_SESSION['updated'])){
                 echo "<h3 class='alert alert-success'>{$_SESSION['updated']}</h3>";
             }
@@ -45,7 +44,7 @@
                     <a href="#">{$post_title}</a>
                 </h2>
                 <p class="lead">
-                    by <a href="index.php">{$post_author}</a>
+                    by <a href="author_posts.php?author={$post_author}">{$post_author}</a>
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> Posted on {$post_date}</p>
                 <hr>

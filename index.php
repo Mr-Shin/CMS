@@ -13,7 +13,24 @@
             <!-- Blog Entries Column -->
             <div class="col-md-8">
                 <?php
-                    $query= "SELECT * FROM posts WHERE status = 'published'";
+                $per_page = 3;
+                if (isset($_GET['p'])){
+                    $p = $_GET['p'];
+                }
+                else{
+                    $p = 1;
+                }
+                if ($p ==1){
+                    $page_1=0;
+                } else{
+                    $page_1 = ($p * $per_page) -$per_page;
+                }
+                $query_count = "SELECT * FROM posts WHERE status = 'published'";
+                $find = mysqli_query($connection,$query_count);
+                $count = mysqli_num_rows($find);
+                $count = ceil($count/$per_page);
+
+                    $query= $query_count ." LIMIT {$page_1},$per_page ";
                     $select_posts = mysqli_query($connection,$query);
                     if (mysqli_num_rows($select_posts) == 0){
                         echo "<h1 class='text-center'>No published posts available.</h1>";
@@ -36,7 +53,7 @@
                     <a href="post.php?id={$post_id}">{$post_title}</a>
                 </h2>
                 <p class="lead">
-                    by <a href="index.php">{$post_author}</a>
+                    by <a href="author_posts.php?author={$post_author}">{$post_author}</a>
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> Posted on {$post_date}</p>
                 <hr>
@@ -61,7 +78,21 @@ EOT;
         <!-- /.row -->
 
         <hr>
+        <div class="text-center">
+        <ul class="pagination">
+            <?php
+                for ($i=1; $i <=$count; $i++){
+                    if ($i == $p) {
+                        echo "<li class='active'><a href=\"index.php?p={$i}\">{$i}</a></li>";
+                    }
+                    else{
+                        echo "<li><a href=\"index.php?p={$i}\">{$i}</a></li>";
 
+                    }
+                    }
+            ?>
+        </ul>
+        </div>
         <!-- Footer -->
         <footer>
             <div class="row">

@@ -72,12 +72,18 @@ if (isset($_GET['status'])){
     header("Location: comments.php");
 
 }
+
 if (isset($_GET['del'])){
-    $id = $_GET['del'];
-    $query = "DELETE FROM comments WHERE id={$id}";
-    $deleteComment = mysqli_query($connection,$query);
-    queryResult($deleteComment);
-    header("Location: comments.php");
+    if (isset($_SESSION['role'])) {
+        if ($_SESSION['role']=='Admin'){
+            $id = $_GET['del'];
+            $query = "DELETE FROM comments WHERE id={$id}";
+            $deleteComment = mysqli_query($connection,$query);
+            queryResult($deleteComment);
+            header("Location: comments.php");
+        }
+    }
+
 
 }
 ?>

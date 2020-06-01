@@ -63,11 +63,15 @@ if (isset($_GET['role'])){
 
 }
 if (isset($_GET['del'])){
-    $id = $_GET['del'];
-    $query = "DELETE FROM users WHERE id={$id}";
-    $deleteUser = mysqli_query($connection,$query);
-    queryResult($deleteUser);
-    header("Location: users.php");
+    if (isset($_SESSION['role'])) {
+        if ($_SESSION['role']=='Admin')
+        $id = $_GET['del'];
+        $query = "DELETE FROM users WHERE id={$id}";
+        $deleteUser = mysqli_query($connection,$query);
+        queryResult($deleteUser);
+        header("Location: users.php");
+    }
+
 
 }
 ?>

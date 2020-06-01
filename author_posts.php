@@ -13,9 +13,12 @@
         <!-- Blog Entries Column -->
         <div class="col-md-8">
             <?php
-            if(isset($_GET['id'])){
-                $query= "SELECT * FROM posts WHERE category_id={$_GET['id']} AND status='Published'";
+            $author = $_GET['author'];
+            $query= "SELECT * FROM posts WHERE status = 'published' AND author='{$author}'";
             $select_posts = mysqli_query($connection,$query);
+            if (mysqli_num_rows($select_posts) == 0){
+                echo "<h1 class='text-center'>No published posts available.</h1>";
+            }
             while ($row = mysqli_fetch_assoc($select_posts)){
                 $post_id = $row['id'];
                 $post_title = $row['title'];
@@ -34,7 +37,7 @@
                     <a href="post.php?id={$post_id}">{$post_title}</a>
                 </h2>
                 <p class="lead">
-                    by <a href="author_posts.php?author={$post_author}">{$post_author}</a>
+                    by {$post_author}
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> Posted on {$post_date}</p>
                 <hr>
@@ -47,19 +50,8 @@
 EOT;
 
             }
-            }
             ?>
 
-
-            <!-- Pager -->
-            <ul class="pager">
-                <li class="previous">
-                    <a href="#">&larr; Older</a>
-                </li>
-                <li class="next">
-                    <a href="#">Newer &rarr;</a>
-                </li>
-            </ul>
 
         </div>
 

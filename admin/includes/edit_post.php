@@ -8,7 +8,6 @@
         $post_title = $row['title'];
         $post_date = date('F d, Y', strtotime($row['date']));
         $post_image = $row['image'];
-        $post_author = $row['author'];
         $post_category = $row['category_id'];
         $post_content = $row['content'];
         $post_status = $row['status'];
@@ -16,7 +15,6 @@
 
     if (isset($_POST['update_post'])){
         $title = $_POST['title'];
-        $author = $_POST['author'];
         $category = $_POST['category_id'];
         $status = $_POST['status'];
         $image = $_FILES['image']['name'];
@@ -30,7 +28,6 @@
         }
         $query = "UPDATE posts SET ";
         $query .="title  = '{$title}', ";
-        $query .="author  = '{$author}', ";
         $query .="category_id = {$category}, ";
         $query .="date   =  '{$date}', ";
         $query .="status = '{$status}', ";
@@ -85,11 +82,6 @@
 
         </select>
 
-    </div>
-
-    <div class="form-group">
-        <label for="author">Post Author</label>
-        <input value="<?php echo $post_author ?>" type="text" class="form-control" name="author">
     </div>
 
     <div class="form-group">

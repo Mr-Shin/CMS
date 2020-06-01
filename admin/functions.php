@@ -64,12 +64,17 @@ function findAllCategories(){
 function deleteCategory(){
     global $connection;
     if (isset($_GET['delete'])){
-        $delete_id=$_GET['delete'];
-        $query = "DELETE FROM categories WHERE id={$delete_id}";
-        $log=mysqli_query($connection,$query);
-        if (!$log){
-            die("Query Failed! ".mysqli_error($connection));
+        if (isset($_SESSION['role'])) {
+            if ($_SESSION['role']=='Admin'){
+                $delete_id=$_GET['delete'];
+                $query = "DELETE FROM categories WHERE id={$delete_id}";
+                $log=mysqli_query($connection,$query);
+                if (!$log){
+                    die("Query Failed! ".mysqli_error($connection));
+                }
+                header("Location: categories.php");
+            }
         }
-        header("Location: categories.php");
+
     }
 }

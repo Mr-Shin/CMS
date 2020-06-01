@@ -76,12 +76,17 @@ while ($row = mysqli_fetch_assoc($select_posts)) {
 </form>
 <?php
 if (isset($_GET['del'])){
-    $id = $_GET['del'];
-    $query = "DELETE FROM posts WHERE id={$id}";
-    $deletePost = mysqli_query($connection,$query);
-    queryResult($deletePost);
-    header("Location: posts.php");
+    if (isset($_SESSION['role'])) {
+        if ($_SESSION['role']=='Admin'){
 
+            $id = $_GET['del'];
+            $query = "DELETE FROM posts WHERE id={$id}";
+            $deletePost = mysqli_query($connection,$query);
+            queryResult($deletePost);
+            header("Location: posts.php");
+
+        }
+    }
 }
 ?>
                     </div>
