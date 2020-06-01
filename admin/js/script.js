@@ -23,4 +23,16 @@ $("#checkAll").change(function() {
         $(".checkBoxes").prop('checked',false)
     }
 });
+function loadOnline() {
+    $.get(
+        "functions.php?online=result",
+        function (data) {
+            $(".online-users").text(data);
+        }
+    );
+}
+
+setInterval(function () {
+    loadOnline();
+},500);
 

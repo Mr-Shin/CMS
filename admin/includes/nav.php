@@ -1,4 +1,5 @@
 <ul class="nav navbar-right top-nav">
+    <li><a>Users Online: <span class="online-users"></span></a></li>
     <li><a href="../index.php">Show Website</a></li>
     <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo $_SESSION['firstname'] .' '. $_SESSION['lastname']?> <b class="caret"></b></a>
