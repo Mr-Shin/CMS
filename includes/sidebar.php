@@ -19,6 +19,13 @@
     <!-- Blog Search Well -->
 
     <div class="well">
+        <?php
+            if (isset($_SESSION['wrong'])){
+                $m = $_SESSION['wrong'];
+                echo "<h5 class='alert alert-danger'>{$m}</h5>";
+                unset($_SESSION['wrong']);
+            }
+        ?>
         <h4>Login</h4>
         <form action="includes/login.php" method="post">
             <div class="form-group">

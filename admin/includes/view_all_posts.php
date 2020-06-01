@@ -13,7 +13,7 @@ if (isset($_POST['deleteBtn'])){
 <div class="col-xs-12">
     <form action="" method="post">
         <div id="deleteBulk" class="col-xs-12" style="margin-bottom:2rem;padding: 0">
-            <button type="submit" name="deleteBtn" id="deleteBtn" class="btn btn-danger" disabled>Delete</button>
+            <button onclick="return confirm('Are you sure?')" type="submit" name="deleteBtn" id="deleteBtn" class="btn btn-danger" disabled>Delete</button>
         </div>
         <table class="table table-bordered">
 
@@ -63,7 +63,7 @@ while ($row = mysqli_fetch_assoc($select_posts)) {
                                         <td style="vertical-align: middle"><img width="150px" src="../images/{$post_image}" alt=""></td>
                                         <td style="vertical-align: middle">{$post_date}</td>
                                         <td style="vertical-align: middle"><a class="btn btn-info" href="posts.php?p=edit-post&id=$post_id">Edit</a></td>
-                                        <td style="vertical-align: middle"><a class="btn btn-danger" href="posts.php?del=$post_id">Delete</a></td>
+                                        <td style="vertical-align: middle"><a onclick="return confirm('Are you sure?')" class="btn btn-danger" href="posts.php?del=$post_id">Delete</a></td>
                                         </tr>
                                     EOT;
 

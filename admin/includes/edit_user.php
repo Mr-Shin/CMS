@@ -22,6 +22,8 @@ if (isset($_POST['update_user'])){
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $password = password_hash($password, PASSWORD_BCRYPT);
+
 //    $image = $_FILES['image']['name'];
 //    $tmp_image = $_FILES['image']['tmp_name'];
     $role = $_POST['role'];
@@ -69,7 +71,7 @@ if (isset($_POST['update_user'])){
     </div>
     <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" class="form-control" name="password" value="<?php echo $password?>">
+        <input type="password" class="form-control" name="password">
     </div>
     <!--    <div class="form-group">-->
     <!--        <label for="image">User Image</label>-->
