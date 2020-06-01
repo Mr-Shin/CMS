@@ -16,6 +16,8 @@ if (isset($_POST['add_user'])){
               VALUES('{$firstname}','{$lastname}','{$username}','{$email}','{$password}','{$role}')";
     $user=mysqli_query($connection,$query);
     queryResult($user);
+    header("Location: users.php");
+
 }
 ?>
 

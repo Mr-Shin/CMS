@@ -16,6 +16,9 @@ if (isset($_POST['create_post'])){
               VALUES('{$title}','{$author}','{$category}','{$status}','{$image}','{$content}','{$date}')";
     $post=mysqli_query($connection,$query);
     queryResult($post);
+    $id = mysqli_insert_id($connection);
+    echo "<h3 class='alert alert-success'>Post Added successfully. <a href='../post.php?id={$id}'>View Post</a></h3>";
+
 }
 ?>
 
@@ -64,7 +67,6 @@ if (isset($_POST['create_post'])){
     <div class="form-group">
         <label for="status">Status</label>
         <select id="status" name="status">
-            <option value="draft">Post Status</option>
             <option value="published">Published</option>
             <option value="draft">Draft</option>
         </select>
@@ -80,8 +82,7 @@ if (isset($_POST['create_post'])){
 
     <div class="form-group">
         <label for="content">Post Content</label>
-        <textarea class="form-control" name="content" id="" cols="30" rows="10">
-         </textarea>
+        <textarea class="form-control" name="content" id="" cols="30" rows="10"></textarea>
     </div>
 
 

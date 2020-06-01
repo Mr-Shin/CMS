@@ -14,6 +14,11 @@
         <!-- Blog Entries Column -->
         <div class="col-md-8">
             <?php
+            session_start();
+            if (isset($_SESSION['updated'])){
+                echo "<h3 class='alert alert-success'>{$_SESSION['updated']}</h3>";
+            }
+            unset($_SESSION['updated']);
             if (isset($_GET['id'])){
                 $id= $_GET['id'];
                 $query= "SELECT * FROM posts WHERE id={$id}";
@@ -25,11 +30,16 @@
                     $post_author = $row['author'];
                     $post_content = $row['content'];
                     echo <<<EOT
-  <h1 class="page-header">
+                    <h1 class="page-header">
                     Page Heading
                     <small>Secondary Text</small>
-                </h1>
+                    EOT;
+                    if (isset($_SESSION['role'])){
+                        echo "<a href='admin/posts.php?p=edit-post&id={$id}' class=\"btn btn-primary pull-right\">Edit Post</a>";
+                    }
+                    echo <<<EOT
 
+                </h1>
                 <!-- First Blog Post -->
                 <h2>
                     <a href="#">{$post_title}</a>
@@ -67,10 +77,16 @@ EOT;
             $comment_email = $_POST['comment_email'];
             $comment_content = $_POST['comment_content'];
             $comment_date = date("Y-m-d h:i:sa");
-            $query = "INSERT INTO comments (post_id, author, email, content, status, date)
+            if (!empty($comment_author) && !empty($comment_email) && !empty($comment_content)) {
+                $query = "INSERT INTO comments (post_id, author, email, content, status, date)
                   VALUES ({$id},'{$comment_author}','{$comment_email}','{$comment_content}', 'Unapproved', '{$comment_date}')";
-            $res = mysqli_query($connection, $query);
-            queryResult($res);
+                $res = mysqli_query($connection, $query);
+                queryResult($res);
+                echo "<h3 class='alert alert-success'>Comment added successfully. Wait for approval...</h3>";
+            }
+            else{
+                echo "<h3 class='alert alert-danger'>All fields are required.</h3>";
+            }
         }
 
     ?>

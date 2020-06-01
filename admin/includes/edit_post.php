@@ -39,7 +39,9 @@
         $query .= "WHERE id = {$post_id} ";
         $res = mysqli_query($connection,$query);
         queryResult($res);
-        header("Location: posts.php");
+        $_SESSION['updated'] = "Post Updated Successfully";
+
+        header("Location: ../post.php?id={$id}");
 
     }
 ?>
@@ -93,8 +95,19 @@
     <div class="form-group">
         <label for="status">Status</label>
         <select id="status" name="status">
-            <option value="Published">Published</option>
-            <option value="Draft">Draft</option>
+            <?php
+            echo "<option selected value='{$post_status}'>{$post_status}</option>";
+
+            if ($post_status=="Published") {
+                echo "<option value='Draft'>Draft</option>";
+
+            }
+            else{
+                echo "<option value='Published'>Published</option>";
+
+            }
+            ?>
+
         </select>
     </div>
 

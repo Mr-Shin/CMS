@@ -1,7 +1,26 @@
+<?php
+if (isset($_POST['deleteBtn'])){
+    foreach ($_POST['checkBox'] as $check){
+        $query = "DELETE FROM posts WHERE id={$check}";
+        $deletePosts = mysqli_query($connection,$query);
+        queryResult($deletePosts);
+        header("Location: posts.php");
+    }
+}
+
+?>
+
 <div class="col-xs-12">
-    <table class="table table-bordered">
-        <thead>
+    <form action="" method="post">
+        <div id="deleteBulk" class="col-xs-12" style="margin-bottom:2rem;padding: 0">
+            <button type="submit" name="deleteBtn" id="deleteBtn" class="btn btn-danger" disabled>Delete</button>
+        </div>
+        <table class="table table-bordered">
+
+
+            <thead>
         <tr>
+            <th><input type="checkbox" id="checkAll"></th>
             <th>Id</th>
             <th>Author</th>
             <th>Title</th>
@@ -27,9 +46,10 @@ while ($row = mysqli_fetch_assoc($select_posts)) {
     $post_status = $row['status'];
     echo <<<EOT
                                         <tr>
+                                        <td style="vertical-align: middle;"><input class="checkBoxes" type="checkbox" name="checkBox[]" value="{$post_id}"></td>
                                         <td style="vertical-align: middle;">$post_id</td>
                                         <td style="vertical-align: middle;">$post_author</td>
-                                        <td style="vertical-align: middle;">$post_title</td>
+                                        <td style="vertical-align: middle;"><a href="../post.php?id={$post_id}">$post_title</a></td>
                                         <td style="vertical-align: middle;">
                                         EOT;
                                         $cat= "SELECT * from categories WHERE id= {$post_category}";
@@ -53,6 +73,7 @@ while ($row = mysqli_fetch_assoc($select_posts)) {
 
                             </tbody>
                         </table>
+</form>
 <?php
 if (isset($_GET['del'])){
     $id = $_GET['del'];

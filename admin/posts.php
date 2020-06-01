@@ -50,7 +50,28 @@
 
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
+<script>
+    $(".checkBoxes").change(function(){
+        if ($('.checkBoxes:checked').length > 0) {
+            $('#deleteBtn').prop('disabled', false);
+        }
+        else{
+                $('#deleteBtn').prop('disabled',true);
 
+        }
+    });
+    $("#checkAll").change(function() {
+        if(this.checked) {
+            $('#deleteBtn').prop('disabled',false);
+            $(".checkBoxes").prop('checked',true)
+        }
+        else if(!this.checked) {
+            $('#deleteBtn').prop('disabled',true);
+            $(".checkBoxes").prop('checked',false)
+        }
+    });
+
+</script>
 </body>
 
 </html>
