@@ -25,7 +25,12 @@
                 } else{
                     $page_1 = ($p * $per_page) -$per_page;
                 }
-                $query_count = "SELECT * FROM posts WHERE status = 'published'";
+                if (isset($_SESSION['role']) && $_SESSION['role'] == "Admin") {
+                    $query_count = "SELECT * FROM posts";
+                } else {
+                    $query_count = "SELECT * FROM posts WHERE status='Published'";
+
+                }
                 $find = mysqli_query($connection,$query_count);
                 $count = mysqli_num_rows($find);
                 $count = ceil($count/$per_page);

@@ -9,7 +9,7 @@ if (isset($_POST['deleteBtn'])){
 }
 
 ?>
-
+<?php include "delete_modal.php"?>
 <div class="col-xs-12">
     <form action="" method="post">
         <div id="deleteBulk" class="col-xs-12" style="margin-bottom:2rem;padding: 0">
@@ -63,7 +63,7 @@ while ($row = mysqli_fetch_assoc($select_posts)) {
                                         <td style="vertical-align: middle"><img width="150px" src="../images/{$post_image}" alt=""></td>
                                         <td style="vertical-align: middle">{$post_date}</td>
                                         <td style="vertical-align: middle"><a class="btn btn-info" href="posts.php?p=edit-post&id=$post_id">Edit</a></td>
-                                        <td style="vertical-align: middle"><a onclick="return confirm('Are you sure?')" class="btn btn-danger" href="posts.php?del=$post_id">Delete</a></td>
+                                        <td style="vertical-align: middle"><a data-id="{$post_id}" class="btn btn-danger delete_link" data-toggle="modal" data-target="#exampleModal">Delete</a></td>
                                         </tr>
                                     EOT;
 
@@ -89,4 +89,4 @@ if (isset($_GET['del'])){
     }
 }
 ?>
-                    </div>
+</div>

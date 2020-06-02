@@ -43,5 +43,14 @@
 
 </div>
 
+    <script>
+    $(document).ready(function () {
+        $(".delete_link").click(function () {
+             var id = $(this).attr("data-id");
+             var delete_url = "posts.php?del="+ id;
+             $(".modal_delete_link").attr("href",delete_url);
+        });
+    });
 
+    </script>
 <?php include "includes/footer.php";?>

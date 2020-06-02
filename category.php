@@ -13,17 +13,25 @@
         <!-- Blog Entries Column -->
         <div class="col-md-8">
             <?php
-            if(isset($_GET['id'])){
-                $query= "SELECT * FROM posts WHERE category_id={$_GET['id']} AND status='Published'";
-            $select_posts = mysqli_query($connection,$query);
-            while ($row = mysqli_fetch_assoc($select_posts)){
-                $post_id = $row['id'];
-                $post_title = $row['title'];
-                $post_date = date('F d, Y',strtotime($row['date']));
-                $post_image = $row['image'];
-                $post_author = $row['author'];
-                $post_content =substr($row['content'],0,100);
-                echo <<<EOT
+            if(isset($_GET['id'])) {
+                if (isset($_SESSION['role']) && $_SESSION['role'] == "Admin") {
+                    $query = "SELECT * FROM posts WHERE category_id={$_GET['id']}";
+                } else {
+                    $query = "SELECT * FROM posts WHERE id={$_GET['id']} AND status='Published'";
+
+                }
+                $select_posts = mysqli_query($connection, $query);
+                if (mysqli_num_rows($select_posts) == 0) {
+                    echo "<h1 class='text-center'>No published posts available.</h1>";
+                } else {
+                    while ($row = mysqli_fetch_assoc($select_posts)) {
+                        $post_id = $row['id'];
+                        $post_title = $row['title'];
+                        $post_date = date('F d, Y', strtotime($row['date']));
+                        $post_image = $row['image'];
+                        $post_author = $row['author'];
+                        $post_content = substr($row['content'], 0, 100);
+                        echo <<<EOT
   <h1 class="page-header">
                     Page Heading
                     <small>Secondary Text</small>
@@ -46,20 +54,15 @@
                 <hr>
 EOT;
 
+                    }
+                }
             }
+            else{
+                header("Location: index.php");
             }
             ?>
 
 
-            <!-- Pager -->
-            <ul class="pager">
-                <li class="previous">
-                    <a href="#">&larr; Older</a>
-                </li>
-                <li class="next">
-                    <a href="#">Newer &rarr;</a>
-                </li>
-            </ul>
 
         </div>
 

@@ -18,13 +18,25 @@
                 echo "<h3 class='alert alert-success'>{$_SESSION['updated']}</h3>";
             }
             unset($_SESSION['updated']);
-            if (isset($_GET['id'])){
-                $id= $_GET['id'];
-                $query= "SELECT * FROM posts WHERE id={$id}";
-                $select_posts = mysqli_query($connection,$query);
-                while ($row = mysqli_fetch_assoc($select_posts)){
+            if (isset($_GET['id'])) {
+                $id = $_GET['id'];
+
+                if (isset($_SESSION['role']) && $_SESSION['role'] == "Admin") {
+                    $query = "SELECT * FROM posts WHERE id={$id}";
+                } else {
+                    $query = "SELECT * FROM posts WHERE id={$id} AND status='Published'";
+
+                }
+                $select_posts = mysqli_query($connection, $query);
+                if (mysqli_num_rows($select_posts)==0){
+
+                    http_response_code(404);
+                    echo '<h1 class="text-center">This page was not found :(</h1>';
+                    exit;
+                }
+                while ($row = mysqli_fetch_assoc($select_posts)) {
                     $post_title = $row['title'];
-                    $post_date = date('F d, Y',strtotime($row['date']));
+                    $post_date = date('F d, Y', strtotime($row['date']));
                     $post_image = $row['image'];
                     $post_author = $row['author'];
                     $post_content = $row['content'];
@@ -33,7 +45,7 @@
                     Page Heading
                     <small>Secondary Text</small>
                     EOT;
-                    if (isset($_SESSION['role'])){
+                    if (isset($_SESSION['role'])) {
                         echo "<a href='admin/posts.php?p=edit-post&id={$id}' class=\"btn btn-primary pull-right\">Edit Post</a>";
                     }
                     echo <<<EOT
@@ -54,7 +66,6 @@
 
                 <hr>
 EOT;
-
                 }
             }
 

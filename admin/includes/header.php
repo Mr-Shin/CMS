@@ -39,6 +39,8 @@ if(!isset($_SESSION['username'])) {
     <![endif]-->
     <link href="css/loader.css" rel="stylesheet">
 
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 </head>
