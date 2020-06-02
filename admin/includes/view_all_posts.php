@@ -33,17 +33,20 @@ if (isset($_POST['deleteBtn'])){
         </thead>
         <tbody>
 <?php
-$query = "SELECT * FROM posts";
+$query = "SELECT posts.post_id, posts.post_title, posts.date, posts.image, posts.author, posts.content, posts.status, ";
+$query .= "categories.id, categories.title FROM posts LEFT JOIN categories ON posts.category_id = categories.id";
 $select_posts = mysqli_query($connection, $query);
+queryResult($select_posts);
 while ($row = mysqli_fetch_assoc($select_posts)) {
-    $post_id = $row['id'];
-    $post_title = $row['title'];
+    $post_id = $row['post_id'];
+    $post_title = $row['post_title'];
     $post_date = date('F d, Y', strtotime($row['date']));
     $post_image = $row['image'];
     $post_author = $row['author'];
-    $post_category = $row['category_id'];
     $post_content = $row['content'];
     $post_status = $row['status'];
+    $category_title = $row['title'];
+
     echo <<<EOT
                                         <tr>
                                         <td style="vertical-align: middle;"><input class="checkBoxes" type="checkbox" name="checkBox[]" value="{$post_id}"></td>
@@ -51,13 +54,7 @@ while ($row = mysqli_fetch_assoc($select_posts)) {
                                         <td style="vertical-align: middle;">$post_author</td>
                                         <td style="vertical-align: middle;"><a href="../post.php?id={$post_id}">$post_title</a></td>
                                         <td style="vertical-align: middle;">
-                                        EOT;
-                                        $cat= "SELECT * from categories WHERE id= {$post_category}";
-                                        $res = mysqli_query($connection,$cat);
-                                        while ($cat_row = mysqli_fetch_assoc($res)){
-                                            echo $cat_row['title'];
-                                        }
-                                        echo <<<EOT
+                                        {$category_title}
                                         </td>
                                         <td style="vertical-align: middle;">{$post_status}</td>
                                         <td style="vertical-align: middle"><img width="150px" src="../images/{$post_image}" alt=""></td>

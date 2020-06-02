@@ -17,7 +17,7 @@
                 if (isset($_SESSION['role']) && $_SESSION['role'] == "Admin") {
                     $query = "SELECT * FROM posts WHERE category_id={$_GET['id']}";
                 } else {
-                    $query = "SELECT * FROM posts WHERE id={$_GET['id']} AND status='Published'";
+                    $query = "SELECT * FROM posts WHERE post_id={$_GET['id']} AND status='Published'";
 
                 }
                 $select_posts = mysqli_query($connection, $query);
@@ -25,8 +25,8 @@
                     echo "<h1 class='text-center'>No published posts available.</h1>";
                 } else {
                     while ($row = mysqli_fetch_assoc($select_posts)) {
-                        $post_id = $row['id'];
-                        $post_title = $row['title'];
+                        $post_id = $row['post_id'];
+                        $post_title = $row['post_title'];
                         $post_date = date('F d, Y', strtotime($row['date']));
                         $post_image = $row['image'];
                         $post_author = $row['author'];

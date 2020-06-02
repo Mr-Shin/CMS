@@ -22,9 +22,9 @@
                 $id = $_GET['id'];
 
                 if (isset($_SESSION['role']) && $_SESSION['role'] == "Admin") {
-                    $query = "SELECT * FROM posts WHERE id={$id}";
+                    $query = "SELECT * FROM posts WHERE post_id={$id}";
                 } else {
-                    $query = "SELECT * FROM posts WHERE id={$id} AND status='Published'";
+                    $query = "SELECT * FROM posts WHERE post_id={$id} AND status='Published'";
 
                 }
                 $select_posts = mysqli_query($connection, $query);
@@ -35,7 +35,7 @@
                     exit;
                 }
                 while ($row = mysqli_fetch_assoc($select_posts)) {
-                    $post_title = $row['title'];
+                    $post_title = $row['post_title'];
                     $post_date = date('F d, Y', strtotime($row['date']));
                     $post_image = $row['image'];
                     $post_author = $row['author'];

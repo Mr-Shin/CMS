@@ -1,11 +1,11 @@
 <?php
     $id = $_GET['id'];
-    $query ="SELECT * FROM posts WHERE id={$id}";
+    $query ="SELECT * FROM posts WHERE post_id={$id}";
     $res = mysqli_query($connection,$query);
     queryResult($res);
     while ($row = mysqli_fetch_assoc($res)){
-        $post_id = $row['id'];
-        $post_title = $row['title'];
+        $post_id = $row['post_id'];
+        $post_title = $row['post_title'];
         $post_date = date('F d, Y', strtotime($row['date']));
         $post_image = $row['image'];
         $post_category = $row['category_id'];
@@ -27,13 +27,13 @@
             $image = $post_image;
         }
         $query = "UPDATE posts SET ";
-        $query .="title  = '{$title}', ";
+        $query .="post_title  = '{$title}', ";
         $query .="category_id = {$category}, ";
         $query .="date   =  '{$date}', ";
         $query .="status = '{$status}', ";
         $query .="content= '{$content}', ";
         $query .="image  = '{$image}' ";
-        $query .= "WHERE id = {$post_id} ";
+        $query .= "WHERE post_id = {$post_id} ";
         $res = mysqli_query($connection,$query);
         queryResult($res);
         $_SESSION['updated'] = "Post Updated Successfully";

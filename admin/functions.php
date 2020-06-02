@@ -108,3 +108,15 @@ function deleteCategory(){
 
     }
 }
+
+function recordCount($table){
+    global $connection;
+    $query = "SELECT * FROM " . $table;
+    $select = mysqli_query($connection,$query);
+    queryResult($select);
+    $result = mysqli_num_rows($select);
+    return $result;
+}
+
+
+

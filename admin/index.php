@@ -1,24 +1,16 @@
 <?php include "includes/header.php"?>
 <?php
     // Posts
-    $posts = "SELECT * FROM posts";
-    $res = mysqli_query($connection, $posts);
-    $posts_count = mysqli_num_rows($res);
+    $posts_count = recordCount("posts");
 
     // Comments
-    $comments = "SELECT * FROM comments";
-    $res = mysqli_query($connection, $comments);
-    $comments_count = mysqli_num_rows($res);
+    $comments_count = recordCount("comments");
 
     // Users
-    $users = "SELECT * FROM users";
-    $res = mysqli_query($connection, $users);
-    $users_count = mysqli_num_rows($res);
+    $users_count = recordCount("users");
 
     // Categories
-    $categories = "SELECT * FROM categories";
-    $res = mysqli_query($connection, $categories);
-    $categories_count = mysqli_num_rows($res);
+    $categories_count = recordCount("categories");
 
 ?>
 <body>

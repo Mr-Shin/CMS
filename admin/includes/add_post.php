@@ -12,7 +12,7 @@ if (isset($_POST['create_post'])){
 
     move_uploaded_file($tmp_image,"../images/$image");
 
-    $query = "INSERT INTO posts (title, author, category_id, status, image, content, date)
+    $query = "INSERT INTO posts (post_title, author, category_id, status, image, content, date)
               VALUES('{$title}','{$author}','{$category}','{$status}','{$image}','{$content}','{$date}')";
     $post=mysqli_query($connection,$query);
     queryResult($post);

@@ -20,8 +20,8 @@
                 echo "<h1 class='text-center'>No published posts available.</h1>";
             }
             while ($row = mysqli_fetch_assoc($select_posts)){
-                $post_id = $row['id'];
-                $post_title = $row['title'];
+                $post_id = $row['post_id'];
+                $post_title = $row['post_title'];
                 $post_date = date('F d, Y',strtotime($row['date']));
                 $post_image = $row['image'];
                 $post_author = $row['author'];
