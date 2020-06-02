@@ -17,11 +17,20 @@
                     $query="SELECT * FROM categories";
                     $items=mysqli_query($connection,$query);
                     while ($row = mysqli_fetch_assoc($items)){
-                        echo "<li> <a href=\"category.php?id={$row['id']}\">{$row['title']}</a></li>";
+                        $category_class = '';
+                        $register_class = '';
+                        $pageName =basename($_SERVER['PHP_SELF']);
+                        if (isset($_GET['id']) && $_GET['id']==$row['id']){
+                            $category_class= 'active';
+                        }
+                        else if ($pageName == 'registration.php'){
+                            $register_class= 'active';
+                        }
+                        echo "<li class='{$category_class}'> <a href=\"category.php?id={$row['id']}\">{$row['title']}</a></li>";
                     }
                 ?>
                 <li><a href="admin">Admin</a></li>
-                <li><a href="registration.php">Register</a></li>
+                <li class='<?php echo $register_class ?>'><a href="registration.php">Register</a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
