@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3d69f58a-056b-4c32-8a7b-10a28c889b41" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/contact.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/nav.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/nav.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/sidebar.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/sidebar.php" afterDir="false" />
     </list>
     <list id="88e650f7-35ad-4233-8c8c-5354af062bdf" name="Bulk Delete Posts, Success Message For Some CRUDs , Add Post Link to Posts Page And Comment Validation." comment="" />
     <list id="7c03bfdf-47be-436d-ae71-d21291d2cd44" name="Post CRUD and category page" comment="" />
@@ -28,11 +27,29 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/includes/sidebar.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="115">
-              <caret line="46" column="19" selection-start-line="46" selection-start-column="19" selection-end-line="46" selection-end-column="19" />
+            <state relative-caret-position="75">
+              <caret line="51" selection-start-line="51" selection-end-line="51" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/contact.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="459">
+              <caret line="23" column="56" selection-start-line="23" selection-start-column="56" selection-end-line="23" selection-end-column="56" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/registration.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="406">
+              <caret line="31" column="50" lean-forward="true" selection-end-line="89" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -110,13 +127,14 @@
         <option value="$PROJECT_DIR$/admin/profile.php" />
         <option value="$PROJECT_DIR$/includes/nav.php" />
         <option value="$PROJECT_DIR$/includes/sidebar.php" />
+        <option value="$PROJECT_DIR$/contact.php" />
       </list>
     </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.3" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-330" />
-    <option name="y" value="183" />
+    <option name="x" value="70" />
+    <option name="y" value="17" />
     <option name="width" value="1725" />
     <option name="height" value="905" />
   </component>
@@ -220,7 +238,7 @@
       <workItem from="1590778246300" duration="59189000" />
       <workItem from="1591024079716" duration="362000" />
       <workItem from="1591024873443" duration="9373000" />
-      <workItem from="1591078922564" duration="1499000" />
+      <workItem from="1591078922564" duration="3697000" />
     </task>
     <task id="LOCAL-00001" summary="Category CRUD">
       <created>1590524498848</created>
@@ -233,7 +251,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="127221000" />
+    <option name="totallyTimeSpent" value="129419000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -245,10 +263,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-264" y="147" width="1380" height="724" extended-state="0" />
+    <frame x="56" y="14" width="1380" height="724" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.3986111" visible="true" weight="0.19545455" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.3986111" visible="true" weight="0.20227273" />
       <window_info id="Structure" order="1" sideWeight="0.6013889" side_tool="true" weight="0.1295302" />
       <window_info id="Favorites" order="2" sideWeight="0.50328946" side_tool="true" weight="0.3460465" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -259,8 +277,8 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
-      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49932885" weight="0.32777777" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49932885" visible="true" weight="0.54063606" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49932885" weight="0.60694444" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49932885" weight="0.425" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50067115" side_tool="true" weight="0.9361111" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.32916668" />
       <window_info anchor="bottom" id="PHP-CGI Server" order="12" weight="0.32916668" />
@@ -351,13 +369,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="7" column="44" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/date/date.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="161">
@@ -445,13 +456,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="175">
           <caret line="2157" column="9" selection-start-line="2157" selection-start-column="9" selection-end-line="2157" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/registration.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="27" column="61" lean-forward="true" selection-start-line="27" selection-end-line="28" />
         </state>
       </provider>
     </entry>
@@ -682,8 +686,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/includes/sidebar.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="46" column="19" selection-start-line="46" selection-start-column="19" selection-end-line="46" selection-end-column="19" />
+        <state relative-caret-position="75">
+          <caret line="51" selection-start-line="51" selection-end-line="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registration.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="406">
+          <caret line="31" column="50" lean-forward="true" selection-end-line="89" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/contact.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="23" column="56" selection-start-line="23" selection-start-column="56" selection-end-line="23" selection-end-column="56" />
         </state>
       </provider>
     </entry>
