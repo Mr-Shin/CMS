@@ -59,7 +59,7 @@
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> Posted on {$post_date}</p>
                 <hr>
-                <img class="img-responsive" src="images/{$post_image}" alt="">
+                <img class="img-responsive" src="/cms/images/{$post_image}" alt="">
                 <hr>
                 <p>{$post_content}</p>
 

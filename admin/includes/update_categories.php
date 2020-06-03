@@ -28,9 +28,10 @@ if (isset($_POST['update'])) {
     if (empty($title)) {
         echo 'Cannot be empty <br>';
     } else {
-        $query = "UPDATE categories SET title='{$title}' WHERE id={$id}";
-        $log=mysqli_query($connection, $query);
-        if (!$log){
+        $stmt = mysqli_prepare($connection,"UPDATE categories SET title=? WHERE id=?");
+        mysqli_stmt_bind_param($stmt, 'si', $title,$id);
+        mysqli_stmt_execute($stmt);
+        if (!$stmt){
             die("Query Failed! ".mysqli_error($connection));
         }
         header("Location: categories.php");

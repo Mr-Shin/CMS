@@ -33,10 +33,10 @@ while ($row = mysqli_fetch_assoc($select_comments)) {
         <td style="vertical-align: middle">$comment_status</td>
         <td style="vertical-align: middle">
         EOT;
-        $q = "SELECT * from posts WHERE id={$comment_post_id}";
+        $q = "SELECT * from posts WHERE post_id={$comment_post_id}";
         $res = mysqli_query($connection,$q);
         while ($row = mysqli_fetch_assoc($res)){
-            echo "<a href=\"../post.php?id={$row['id']}\">{$row['title']}</a>";
+            echo "<a href=\"../post.php?id={$row['post_id']}\">{$row['title']}</a>";
         }
                                          echo <<<EOT
                                         </td>

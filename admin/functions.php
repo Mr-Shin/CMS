@@ -43,8 +43,9 @@ function addCategory(){
         echo 'Cannot be empty <br>';
     }
     else {
-        $query = "INSERT INTO categories (title) VALUE ('{$title}')";
-        mysqli_query($connection,$query);
+        $stmt = mysqli_prepare($connection,"INSERT INTO categories (title) VALUE (?)");
+        mysqli_stmt_bind_param($stmt, 's',$title);
+        mysqli_stmt_execute($stmt);
     }
     }
 }

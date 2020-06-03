@@ -1,4 +1,5 @@
 <?php include "includes/header.php"?>
+<?php include "admin/functions.php"?>
 <body>
 
 <!-- Navigation -->
@@ -13,23 +14,29 @@
         <div class="col-md-8">
             <?php
             if(isset($_GET['id'])) {
-                if (isset($_SESSION['role']) && $_SESSION['role'] == "Admin") {
-                    $query = "SELECT * FROM posts WHERE category_id={$_GET['id']}";
+                if (is_admin($_SESSION['username'])) {
+                    $stmt1 =mysqli_prepare($connection,"SELECT post_id, post_title, author, date, image, content FROM posts WHERE category_id=?");
                 } else {
-                    $query = "SELECT * FROM posts WHERE category_id={$_GET['id']} AND status='Published'";
+                    $stmt2 =mysqli_prepare($connection,"SELECT post_id, post_title, author, image, date, content FROM posts WHERE category_id=? AND status=?");
+                    $published = "Published";
+                }
+                if(isset($stmt1)){
+                    mysqli_stmt_bind_param($stmt1,"i", $_GET['id']);
+                    mysqli_stmt_execute($stmt1);
+                    mysqli_stmt_bind_result($stmt1,$post_id,$post_title, $author, $date, $image, $content);
+                    $stmt = $stmt1;
+                }
+                else{
+                    mysqli_stmt_bind_param($stmt2,"is", $_GET['id'], $published);
+                    mysqli_stmt_execute($stmt2);
+                    mysqli_stmt_bind_result($stmt1,$post_id, $post_title, $author, $date, $image, $content);
+                    $stmt = $stmt2;
 
                 }
-                $select_posts = mysqli_query($connection, $query);
-                if (mysqli_num_rows($select_posts) == 0) {
-                    echo "<h1 class='text-center'>No published posts available.</h1>";
-                } else {
-                    while ($row = mysqli_fetch_assoc($select_posts)) {
-                        $post_id = $row['post_id'];
-                        $post_title = $row['post_title'];
-                        $post_date = date('F d, Y', strtotime($row['date']));
-                        $post_image = $row['image'];
-                        $post_author = $row['author'];
-                        $post_content = substr($row['content'], 0, 100);
+//                if (mysqli_stmt_num_rows($stmt) == 0) {
+//                    echo "<h1 class='text-center'>No published posts available.</h1>";
+//                }
+                    while (mysqli_stmt_fetch($stmt)) {
                         echo <<<EOT
   <h1 class="page-header">
                     Page Heading
@@ -41,13 +48,13 @@
                     <a href="/cms/post/{$post_id}">{$post_title}</a>
                 </h2>
                 <p class="lead">
-                    by <a href="/cms/author_posts/{$post_author}">{$post_author}</a>
+                    by <a href="/cms/author_posts/{$author}">{$author}</a>
                 </p>
-                <p><span class="glyphicon glyphicon-time"></span> Posted on {$post_date}</p>
+                <p><span class="glyphicon glyphicon-time"></span> Posted on {$date}</p>
                 <hr>
-                <img class="img-responsive" src="images/{$post_image}" alt="">
+                <img class="img-responsive" src="/cms/images/{$image}" alt="">
                 <hr>
-                <p>{$post_content}</p>
+                <p>{$content}</p>
                 <a class="btn btn-primary" href="/cms/post/{$post_id}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
                 <hr>
@@ -55,7 +62,7 @@ EOT;
 
                     }
                 }
-            }
+
             else{
                 header("Location: index.php");
             }
