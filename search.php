@@ -15,11 +15,11 @@
             <?php
             if(isset($_POST['submit'])){
                 $search = $_POST['search'];
-                $query = "SELECT * FROM posts WHERE title LIKE '%$search%'";
+                $query = "SELECT * FROM posts WHERE post_title LIKE '%$search%' AND status='Published'";
                 $search_query = mysqli_query($connection,$query);
                 if (mysqli_num_rows($search_query)>0) {
                     while ($row = mysqli_fetch_assoc($search_query)) {
-                        $post_title = $row['title'];
+                        $post_title = $row['post_title'];
                 $post_date = date('F d, Y',strtotime($row['date']));
                 $post_image = $row['image'];
                 $post_author = $row['author'];
@@ -55,16 +55,6 @@ EOT;
             }
             ?>
 
-
-            <!-- Pager -->
-            <ul class="pager">
-                <li class="previous">
-                    <a href="#">&larr; Older</a>
-                </li>
-                <li class="next">
-                    <a href="#">Newer &rarr;</a>
-                </li>
-            </ul>
 
         </div>
 

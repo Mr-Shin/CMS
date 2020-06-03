@@ -55,7 +55,7 @@
 
                 <!-- First Blog Post -->
                 <h2>
-                    <a href="post.php?id={$post_id}">{$post_title}</a>
+                    <a href="post/{$post_id}">{$post_title}</a>
                 </h2>
                 <p class="lead">
                     by <a href="author_posts.php?author={$post_author}">{$post_author}</a>
@@ -65,7 +65,7 @@
                 <img class="img-responsive" src="images/{$post_image}" alt="">
                 <hr>
                 <p>{$post_content}</p>
-                <a class="btn btn-primary" href="post.php?id={$post_id}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                <a class="btn btn-primary" href="post/{$post_id}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
                 <hr>
 EOT;

@@ -22,12 +22,12 @@ if (isset($_POST['login'])){
             }
             else{
                 $_SESSION['wrong'] = "Wrong Password";
-               header("Location: ../index.php");
+               header("Location: ../");
             }
 
         }
     }
     else{
-        header("Location: ../index.php");
+        header("Location: ../");
     }
 }

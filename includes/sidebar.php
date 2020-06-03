@@ -3,7 +3,7 @@
     <!-- Blog Search Well -->
     <div class="well">
         <h4>Blog Search</h4>
-        <form action="search.php" method="post">
+        <form action="/cms/search.php" method="post">
         <div class="input-group">
             <input name="search" type="text" class="form-control">
             <span class="input-group-btn">
@@ -28,7 +28,7 @@
         ?>
         <?php if (isset($_SESSION['role'])): ?>
         <h4> Logged in as <?php echo $_SESSION['username']?></h4>
-            <a href="includes/logout.php" class="btn btn-primary">Logout</a>
+            <a href="/cms/includes/logout.php" class="btn btn-primary">Logout</a>
         <?php else: ?>
 
         <h4>Login</h4>
@@ -58,7 +58,7 @@
                 <ul class="list-unstyled">
                     <?php
                     while ($row = mysqli_fetch_assoc($items)){
-                        echo "<li> <a href=\"category.php?id={$row['id']}\">{$row['title']}</a></li>";
+                        echo "<li> <a href=\"/cms/category/{$row['id']}\">{$row['title']}</a></li>";
                     }
                     ?>
                 </ul>
