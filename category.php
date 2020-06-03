@@ -1,4 +1,3 @@
-<?php include "includes/db.php"?>
 <?php include "includes/header.php"?>
 <body>
 
@@ -17,7 +16,7 @@
                 if (isset($_SESSION['role']) && $_SESSION['role'] == "Admin") {
                     $query = "SELECT * FROM posts WHERE category_id={$_GET['id']}";
                 } else {
-                    $query = "SELECT * FROM posts WHERE post_id={$_GET['id']} AND status='Published'";
+                    $query = "SELECT * FROM posts WHERE category_id={$_GET['id']} AND status='Published'";
 
                 }
                 $select_posts = mysqli_query($connection, $query);
@@ -39,17 +38,17 @@
 
                 <!-- First Blog Post -->
                 <h2>
-                    <a href="post.php?id={$post_id}">{$post_title}</a>
+                    <a href="/cms/post/{$post_id}">{$post_title}</a>
                 </h2>
                 <p class="lead">
-                    by <a href="author_posts.php?author={$post_author}">{$post_author}</a>
+                    by <a href="/cms/author_posts/{$post_author}">{$post_author}</a>
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> Posted on {$post_date}</p>
                 <hr>
                 <img class="img-responsive" src="images/{$post_image}" alt="">
                 <hr>
                 <p>{$post_content}</p>
-                <a class="btn btn-primary" href="post.php?id={$post_id}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                <a class="btn btn-primary" href="/cms/post/{$post_id}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
                 <hr>
 EOT;

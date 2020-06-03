@@ -1,11 +1,9 @@
-<?php  include "includes/db.php"; ?>
  <?php  include "includes/header.php"; ?>
-
-
+<?php include "admin/functions.php";?>
 
     <!-- Navigation -->
 
-    <?php include "includes/nav.php"?>
+ <?php include "includes/nav.php"?>
     
  
     <!-- Page Content -->
@@ -13,33 +11,13 @@
     
 <section id="login">
     <div class="container">
+
         <?php
         if (isset($_POST['register'])) {
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            $email = $_POST['email'];
-            if (!empty($username) && !empty($password) && !empty($email)){
-                if (strlen($password)<6){
-                    echo "<h3 class='alert alert-danger'>Password must be longer than 6 characters.</h3>";
-                }
-                else {
-                    $username = mysqli_real_escape_string($connection, $username);
-                    $password = mysqli_real_escape_string($connection, $password);
-                    $password = password_hash($password, PASSWORD_BCRYPT);
-                    $email = mysqli_real_escape_string($connection, $email);
-                    $q = "INSERT INTO users (username, password, email, role) VALUES ('{$username}', '{$password}', '{$email}', 'Subscriber')";
-                    $res = mysqli_query($connection, $q);
-                    echo "<h3 class='alert alert-success'>Your registration has been submitted.</h3>";
-
-                }
-            }
-            else{
-                echo "<h3 class='alert alert-danger'>All fields are required.</h3>";
-
-            }
-
-        }
-        ?>
+            $username =trim($_POST['username']);
+            $email = trim($_POST['email']);
+            register_user($username, trim($_POST['password']),$email);
+        }?>
         <div class="row">
             <div class="col-xs-6 col-xs-offset-3">
                 <div class="form-wrap">
@@ -47,11 +25,13 @@
                     <form role="form" action="registration.php" method="post" id="login-form" autocomplete="off" style="margin-top: 2rem">
                         <div class="form-group">
                             <label for="username" class="sr-only">username</label>
-                            <input type="text" name="username" id="username" class="form-control" placeholder="Enter Desired Username">
+                            <input type="text" name="username" id="username" class="form-control" placeholder="Enter Desired Username"
+                                   value="<?php echo isset($username) ? $username : '' ?>">
                         </div>
                          <div class="form-group">
                             <label for="email" class="sr-only">Email</label>
-                            <input type="email" name="email" id="email" class="form-control" placeholder="somebody@example.com">
+                            <input type="email" name="email" id="email" class="form-control" placeholder="somebody@example.com"
+                                   value="<?php echo isset($email) ? $email : '' ?>">
                         </div>
                          <div class="form-group">
                             <label for="password" class="sr-only">Password</label>

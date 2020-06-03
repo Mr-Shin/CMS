@@ -1,7 +1,6 @@
 <?php
 include "db.php";
 session_start();
-include "../admin/functions.php";
 if (isset($_POST['login'])){
     $user = $_POST['username'];
     $pass = $_POST['password'];

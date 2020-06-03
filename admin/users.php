@@ -1,5 +1,11 @@
 <?php include "includes/header.php" ?>
 
+<?php
+    if (!is_admin($_SESSION['username'])){
+        header('Location: /cms/admin');
+    }
+?>
+
 <body>
 <div id="wrapper">
 

@@ -117,6 +117,59 @@ function recordCount($table){
     $result = mysqli_num_rows($select);
     return $result;
 }
+function is_admin($username){
+    global $connection;
+    $query = "SELECT role FROM users WHERE username = '$username'";
+    $res = mysqli_query($connection,$query);
+    queryResult($res);
+    $row = mysqli_fetch_assoc($res);
+    if ($row['role'] == 'Admin'){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
 
+function username_exists($username){
+    global $connection;
+    $query = "SELECT username FROM users WHERE username = '$username'";
+    $res = mysqli_query($connection,$query);
+    queryResult($res);
+    if (mysqli_num_rows($res) > 0){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+function register_user($username, $password, $email){
+        global $connection;
+            if (!empty($username) && !empty($password) && !empty($email)){
+                if (username_exists($username)){
+                    echo "<h3 class='alert alert-danger'>User Exists.</h3>";
+                }
+                else if (strlen($password)<6){
+                    echo "<h3 class='alert alert-danger'>Password must be longer than 6 characters.</h3>";
+                }
+                else {
+                    $username = mysqli_real_escape_string($connection, $username);
+                    $password = mysqli_real_escape_string($connection, $password);
+                    $password = password_hash($password, PASSWORD_BCRYPT);
+                    $email = mysqli_real_escape_string($connection, $email);
+                    $q = "INSERT INTO users (username, password, email, role) VALUES ('{$username}', '{$password}', '{$email}', 'Subscriber')";
+                    $res = mysqli_query($connection, $q);
+                    echo "<h3 class='alert alert-success'>Your registration has been submitted.</h3>";
+
+                }
+            }
+            else{
+                echo "<h3 class='alert alert-danger'>All fields are required.</h3>";
+
+            }
+
+
+}
 
 

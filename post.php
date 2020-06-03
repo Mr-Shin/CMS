@@ -1,4 +1,3 @@
-<?php include "includes/db.php"?>
 <?php include "includes/header.php"?>
 <?php include "admin/functions.php"?>
 <body>
@@ -46,17 +45,17 @@
                     <small>Secondary Text</small>
                     EOT;
                     if (isset($_SESSION['role'])) {
-                        echo "<a href='admin/posts.php?p=edit-post&id={$id}' class=\"btn btn-primary pull-right\">Edit Post</a>";
+                        echo "<a href='/cms/admin/posts.php?p=edit-post&id={$id}' class=\"btn btn-primary pull-right\">Edit Post</a>";
                     }
                     echo <<<EOT
 
                 </h1>
                 <!-- First Blog Post -->
                 <h2>
-                    <a href="#">{$post_title}</a>
+                    {$post_title}
                 </h2>
                 <p class="lead">
-                    by <a href="author_posts.php?author={$post_author}">{$post_author}</a>
+                    by <a href="/cms/author_posts/{$post_author}">{$post_author}</a>
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> Posted on {$post_date}</p>
                 <hr>

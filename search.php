@@ -1,4 +1,3 @@
-<?php include "includes/db.php"?>
 <?php include "includes/header.php"?>
 <body>
 
@@ -19,6 +18,7 @@
                 $search_query = mysqli_query($connection,$query);
                 if (mysqli_num_rows($search_query)>0) {
                     while ($row = mysqli_fetch_assoc($search_query)) {
+                        $post_id = $row['post_id'];
                         $post_title = $row['post_title'];
                 $post_date = date('F d, Y',strtotime($row['date']));
                 $post_image = $row['image'];
@@ -32,17 +32,17 @@
 
                 <!-- First Blog Post -->
                 <h2>
-                    <a href="#">{$post_title}</a>
+                    <a href="/cms/post/{$post_id}">{$post_title}</a>
                 </h2>
                 <p class="lead">
-                    by <a href="index.php">{$post_author}</a>
+                    by <a href="/cms/author_posts/{$post_author}">{$post_author}</a>
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> Posted on {$post_date}</p>
                 <hr>
                 <img class="img-responsive" src="{$post_image}" alt="">
                 <hr>
                 <p>{$post_content}</p>
-                <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                <a class="btn btn-primary" href="/cms/post/{$post_id}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
                 <hr>
 EOT;
