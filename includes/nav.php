@@ -30,12 +30,23 @@
                         else if ($pageName == 'contact.php'){
                             $contact_class= 'active';
                         }
+                        else if ($pageName == 'login.php'){
+                            $login_class= 'active';
+                        }
                         echo "<li class='{$category_class}'> <a href=\"/cms/category/{$row['id']}\">{$row['title']}</a></li>";
                     }
                 ?>
-                <li><a href="/cms/admin">Admin</a></li>
-                <li class='<?php echo $register_class ?>'><a href="/cms/registration">Register</a></li>
+
                 <li class='<?php echo $contact_class ?>'><a href="/cms/contact">Contact Us</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <?php if(isset($_SESSION['username'])): ?>
+                    <li><a href="/cms/admin">Admin</a></li>
+                    <li><a href="/cms/includes/logout.php">Logout</a></li>
+                <?php else: ?>
+                    <li class='<?php echo $login_class ?>'><a href="/cms/login">Login</a></li>
+                    <li class='<?php echo $register_class ?>'><a href="/cms/registration">Register</a></li>
+                <?php endif; ?>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

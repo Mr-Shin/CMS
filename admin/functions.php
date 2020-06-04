@@ -173,4 +173,44 @@ function register_user($username, $password, $email){
 
 }
 
+function login_user($user,$pass){
+    global $connection;
+    $user = mysqli_real_escape_string($connection,$user);
+    $pass = mysqli_real_escape_string($connection,$pass);
+    $q = "SELECT * FROM users WHERE username = '{$user}'";
+    $res = mysqli_query($connection,$q);
+    if (mysqli_num_rows($res)>0){
+        while ($row = mysqli_fetch_assoc($res)){
+            if (password_verify($pass,$row['password'])){
+                $_SESSION['username'] = $row['username'];
+                $_SESSION['firstname'] = $row['firstname'];
+                $_SESSION['lastname'] = $row['lastname'];
+                $_SESSION['role'] = $row['role'];
+                header("Location: /cms/admin");
 
+            }
+            else{
+                $_SESSION['wrong'] = "Wrong Password";
+            }
+
+        }
+    }
+    else{
+        $_SESSION['wrong'] = "Wrong Username Or Password";
+    }
+
+}
+function email_exists($email){
+    global $connection;
+    $stmt = mysqli_prepare($connection,"SELECT * FROM users WHERE email=?");
+    mysqli_stmt_bind_param($stmt, "s", $email);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_store_result($stmt);
+    $count = mysqli_stmt_num_rows($stmt);
+    if ($count==0){
+        return false;
+    }
+    else{
+        return true;
+    }
+}

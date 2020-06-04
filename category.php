@@ -14,7 +14,7 @@
         <div class="col-md-8">
             <?php
             if(isset($_GET['id'])) {
-                if (is_admin($_SESSION['username'])) {
+                if (isset($_SESSION['username']) && is_admin($_SESSION['username'])) {
                     $stmt1 =mysqli_prepare($connection,"SELECT post_id, post_title, author, date, image, content FROM posts WHERE category_id=?");
                 } else {
                     $stmt2 =mysqli_prepare($connection,"SELECT post_id, post_title, author, image, date, content FROM posts WHERE category_id=? AND status=?");
@@ -29,7 +29,7 @@
                 else{
                     mysqli_stmt_bind_param($stmt2,"is", $_GET['id'], $published);
                     mysqli_stmt_execute($stmt2);
-                    mysqli_stmt_bind_result($stmt1,$post_id, $post_title, $author, $date, $image, $content);
+                    mysqli_stmt_bind_result($stmt2,$post_id, $post_title, $author, $date, $image, $content);
                     $stmt = $stmt2;
 
                 }
@@ -79,27 +79,5 @@ EOT;
     <!-- /.row -->
 
     <hr>
+    <?php include "includes/footer.php" ?>
 
-    <!-- Footer -->
-    <footer>
-        <div class="row">
-            <div class="col-lg-12">
-                <p>Copyright &copy; Your Website 2014</p>
-            </div>
-            <!-- /.col-lg-12 -->
-        </div>
-        <!-- /.row -->
-    </footer>
-
-</div>
-<!-- /.container -->
-
-<!-- jQuery -->
-<script src="js/jquery.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
-
-</body>
-
-</html>
