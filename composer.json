@@ -1,0 +1,17 @@
+{
+    "name": "hosein/cms",
+    "authors": [
+        {
+            "name": "Hosein Shendabadi",
+            "email": "shendabadihosein@gmail.com"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^6.1"
+    },
+    "autoload": {
+        "classmap": [
+            "classes"
+        ]
+    }
+}

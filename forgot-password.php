@@ -1,6 +1,13 @@
+<?php use PHPMailer\PHPMailer\PHPMailer;?>
+<?php use PHPMailer\PHPMailer\Exception;?>
+<?php use PHPMailer\PHPMailer\SMTP;?>
 <?php  include "includes/header.php"; ?>
 <?php  include "admin/functions.php"; ?>
+
+
 <?php
+    require './vendor/autoload.php';
+
     if (isset($_POST['recover-submit'])){
         $email = $_POST['email'];
         $length = 50;
@@ -10,12 +17,38 @@
                 mysqli_stmt_bind_param($stmt, "s", $email);
                 mysqli_stmt_execute($stmt);
                 mysqli_stmt_close($stmt);
+
+
+                /*
+                 Configure PHP Mailer
+                 */
+                $mail = new PHPMailer();
+                $mail->isSMTP();
+                $mail->Host       = Config::SMTP_HOST;
+                $mail->SMTPAuth   = true;
+                $mail->Username   = Config::SMTP_USER;
+                $mail->Password   = Config::SMTP_PASSWORD;
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                $mail->Port       = Config::SMTP_PORT;
+                $mail->isHTML(true);
+                $mail->setFrom('support@cms.com', 'Admin');
+                $mail->addAddress($email);
+                $mail->Subject='Reset Password';
+                $mail->Body = '<p>Please click to reset your password.
+                <a href="http://localhost:1180/cms/reset.php?email='.$email.'&token='.$token.'">Reset Password</a>
+                </p>';
+                if ($mail->send()){
+                    $status =  "Email sent, Check your email.";
+                }else{
+                    $status = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                }
+
             }else{
-                echo "Something's Wrong.";
+                $status = "Something's Wrong.";
             }
         }
         else{
-            echo "21312";
+            $status = "This email does not exist.";
         }
     }
 ?>
@@ -57,7 +90,12 @@
 
                                     <input type="hidden" class="hide" name="token" id="token" value="">
                                 </form>
+                                <?php
+                                if (isset($status)){
+                                    echo "<h4 class=\"alert alert-info\"> {$status}</h4>";
 
+                                }
+                                ?>
                             </div><!-- Body-->
 
                         </div>

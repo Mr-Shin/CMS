@@ -1,4 +1,5 @@
 <?php include "includes/header.php"?>
+<?php include "admin/functions.php"?>
 <body>
 
 <!-- Navigation -->
@@ -14,7 +15,11 @@
             <?php
             if(isset($_POST['submit'])){
                 $search = $_POST['search'];
-                $query = "SELECT * FROM posts WHERE post_title LIKE '%$search%' AND status='Published'";
+                if (isset($_SESSION['username']) && is_admin($_SESSION['username'])) {
+                    $query = "SELECT * FROM posts WHERE post_title LIKE '%$search%'";
+                } else {
+                    $query = "SELECT * FROM posts WHERE post_title LIKE '%$search%' AND status='Published'";
+                }
                 $search_query = mysqli_query($connection,$query);
                 if (mysqli_num_rows($search_query)>0) {
                     while ($row = mysqli_fetch_assoc($search_query)) {
