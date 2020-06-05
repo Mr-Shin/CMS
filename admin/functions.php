@@ -214,3 +214,38 @@ function email_exists($email){
         return true;
     }
 }
+function getUserId($user){
+    global $connection;
+    $query = "SELECT id FROM users WHERE username = '{$user}'";
+    $res = mysqli_query($connection,$query);
+    queryResult($res);
+    return mysqli_fetch_array($res)['id'];
+}
+
+function likeOrUnlike($user_id,$post_id){
+    global $connection;
+    $r =mysqli_query($connection,"SELECT * FROM likes WHERE post_id={$post_id} AND user_id={$user_id}");
+    if (mysqli_num_rows($r)==0){
+        $like_status = 'Like';
+    }
+    else{
+        $like_status = 'Unlike';
+    }
+    return $like_status;
+}
+function getPostLikes($post_id){
+    global $connection;
+    $res = mysqli_query($connection,"SELECT likes FROM posts WHERE post_id={$post_id}");
+    queryResult($res);
+    return mysqli_fetch_array($res)['likes'];
+}
+
+
+function isLoggedIn(){
+    if (isset($_SESSION['username'])){
+        return true;
+    }
+    else{
+        return false;
+    }
+}

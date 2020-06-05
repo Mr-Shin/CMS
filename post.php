@@ -5,6 +5,51 @@
 <!-- Navigation -->
 <?php include "includes/nav.php"?>
 
+<?php
+if (isLoggedIn()) {
+    $user_id = getUserId($_SESSION['username']);
+    $post_id = $_GET['id'];
+
+    $like_status = likeOrUnlike($user_id, $post_id);
+
+    if (isset($_POST['liked'])) {
+
+        // Fetching The Post
+        $post_q = "SELECT * FROM posts WHERE post_id ={$post_id}";
+        $p_res = mysqli_query($connection, $post_q);
+        $row = mysqli_fetch_array($p_res);
+        $likes = $row['likes'];
+
+        //Update Post With Likes
+        $update_q = "UPDATE posts SET likes={$likes} + 1 WHERE post_id={$post_id}";
+        mysqli_query($connection, $update_q);
+
+        //Create Likes For Post
+        $insert_q = "INSERT INTO likes (user_id,post_id) VALUES ({$user_id},{$post_id})";
+        mysqli_query($connection, $insert_q);
+
+    }
+    if (isset($_POST['unliked'])) {
+
+        // Fetching The Post
+        $post_q = "SELECT * FROM posts WHERE post_id ={$post_id}";
+        $p_res = mysqli_query($connection, $post_q);
+        $row = mysqli_fetch_array($p_res);
+        $likes = $row['likes'];
+
+        //Update Post With Likes
+        $update_q = "UPDATE posts SET likes={$likes} - 1 WHERE post_id={$post_id}";
+        mysqli_query($connection, $update_q);
+
+        //Delete Like
+        $delete_q = "DELETE FROM likes WHERE post_id={$post_id} AND user_id={$user_id}";
+        mysqli_query($connection, $delete_q);
+
+    }
+}
+
+?>
+
 <!-- Page Content -->
 <div class="container">
 
@@ -99,6 +144,20 @@ EOT;
         }
 
     ?>
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <?php if(isLoggedIn()):?>
+                <p><a class="likefn <?php echo  strtolower($like_status)?>" href="javascript:void(0)"><span class="glyphicon glyphicon-thumbs-<?php echo $like_status=='Like' ? 'up' : 'down'?>"></span> <span class="likefn-text"><?php echo $like_status;?></span></a></p>
+            <?php else:?>
+                <p>You need to <a href="/cms/login"> login</a> to be able to like</p>
+            <?php endif; ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <p>Likes: <span class="like-number"><?php echo getPostLikes($_GET['id']);?></span></p>
+        </div>
+    </div>
     <!-- Comments Form -->
     <div class="well">
         <h4>Leave a Comment:</h4>
@@ -152,4 +211,92 @@ EOT;
 
     ?>
 
-    <?php include "includes/footer.php" ?>
+    <!-- Footer -->
+    <footer>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Copyright &copy; Your Website 2014</p>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+    </footer>
+
+</div>
+<!-- /.container -->
+
+<!-- jQuery -->
+<script src="/cms/js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/cms/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+        let post_id =<?php echo $post_id; ?>;
+        let user_id =<?php echo $user_id; ?>;
+        let number =parseInt($('.like-number').text());
+        $('.likefn').click(function () {
+            if ($(this).hasClass('like')){
+                $.ajax({
+                    url: "/cms/post.php?id=" + post_id,
+                    type: "post",
+                    data:{
+                        'liked': 1,
+                        'post_id':post_id,
+                        'user_id': user_id,
+                    }
+                });
+                $(this).addClass('unlike').removeClass('like');
+                $(".likefn-text").text('Unlike');
+                $('.glyphicon').addClass('glyphicon-thumbs-down').removeClass('glyphicon-thumbs-up');
+                number+=1;
+            }
+            else{
+                $.ajax({
+                    url: "/cms/post.php?id=" + post_id,
+                    type: "post",
+                    data:{
+                        'unliked': 1,
+                        'post_id':post_id,
+                        'user_id': user_id,
+                    },
+
+                })
+                $(this).addClass('like').removeClass('unlike');
+                $(".likefn-text").text('Like');
+                $('.glyphicon').addClass('glyphicon-thumbs-up').removeClass('glyphicon-thumbs-down');
+                number-=1;
+            }
+            $('.like-number').text(number);
+
+
+        });
+        // $(".like").click(function () {
+        //     $.ajax({
+        //         url: "/cms/post.php?id=" + post_id,
+        //         type: "post",
+        //         data:{
+        //             'liked': 1,
+        //             'post_id':post_id,
+        //             'user_id': user_id,
+        //         }
+        //     });
+        // });
+        // $(".unlike").click(function () {
+        //     $.ajax({
+        //         url: "/cms/post.php?id=" + post_id,
+        //         type: "post",
+        //         data:{
+        //             'unliked': 1,
+        //             'post_id':post_id,
+        //             'user_id': user_id,
+        //         },
+        //
+        //     })
+        // })
+    })
+</script>
+
+</body>
+
+</html>

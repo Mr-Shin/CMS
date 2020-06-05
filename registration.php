@@ -18,6 +18,8 @@
     <div class="container">
 
         <?php
+        $query = "SELECT users.id, , ";
+        $query .= "categories.id, categories.title FROM users LEFT JOIN categories ON users.id = likes.users_id";
         if (isset($_POST['register'])) {
             $username =trim($_POST['username']);
             $email = trim($_POST['email']);
