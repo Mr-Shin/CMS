@@ -118,17 +118,27 @@ function recordCount($table){
     $result = mysqli_num_rows($select);
     return $result;
 }
-function is_admin($username){
-    global $connection;
-    $query = "SELECT role FROM users WHERE username = '$username'";
-    $res = mysqli_query($connection,$query);
-    queryResult($res);
-    $row = mysqli_fetch_assoc($res);
-    if ($row['role'] == 'Admin'){
+//-------- AUTHENTICATION HELPERS --------//
+function isLoggedIn(){
+    if (isset($_SESSION['username'])){
         return true;
     }
     else{
         return false;
+    }
+}
+function is_admin($username){
+    if (isLoggedIn()){
+        global $connection;
+        $query = "SELECT role FROM users WHERE username = '$username'";
+        $res = mysqli_query($connection, $query);
+        queryResult($res);
+        $row = mysqli_fetch_assoc($res);
+        if ($row['role'] == 'Admin') {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 
@@ -222,6 +232,14 @@ function getUserId($user){
     return mysqli_fetch_array($res)['id'];
 }
 
+
+
+
+
+
+
+
+
 function likeOrUnlike($user_id,$post_id){
     global $connection;
     $r =mysqli_query($connection,"SELECT * FROM likes WHERE post_id={$post_id} AND user_id={$user_id}");
@@ -241,11 +259,3 @@ function getPostLikes($post_id){
 }
 
 
-function isLoggedIn(){
-    if (isset($_SESSION['username'])){
-        return true;
-    }
-    else{
-        return false;
-    }
-}
