@@ -31,7 +31,7 @@
                 </li>
             </ul>
         </li>
-        <li class="active">
+        <li>
             <a href="profile.php"><i class="fa fa-fw fa-file"></i> Profile</a>
         </li>
     </ul>

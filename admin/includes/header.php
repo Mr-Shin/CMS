@@ -41,6 +41,5 @@ if(!isset($_SESSION['username'])) {
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 </head>

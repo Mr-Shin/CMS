@@ -1,7 +1,7 @@
 <?php include "includes/header.php" ?>
 
 <?php
-    if (!is_admin($_SESSION['username'])){
+    if (!is_admin()){
         header('Location: /cms/admin');
     }
 ?>

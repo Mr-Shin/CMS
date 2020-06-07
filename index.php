@@ -1,4 +1,5 @@
 <?php include "includes/header.php"?>
+<?php include "admin/functions.php"?>
 <body>
 
     <!-- Navigation -->
@@ -6,11 +7,10 @@
 
     <!-- Page Content -->
     <div class="container">
-
         <div class="row">
-
             <!-- Blog Entries Column -->
             <div class="col-md-8">
+                <!-- Pagination Code -->
                 <?php
                 $per_page = 3;
                 if (isset($_GET['p'])){
@@ -24,11 +24,12 @@
                 } else{
                     $page_1 = ($p * $per_page) -$per_page;
                 }
-                if (isset($_SESSION['role']) && $_SESSION['role'] == "Admin") {
+
+
+                if (is_admin()) {
                     $query_count = "SELECT * FROM posts";
                 } else {
                     $query_count = "SELECT * FROM posts WHERE status='Published'";
-
                 }
                 $find = mysqli_query($connection,$query_count);
                 $count = mysqli_num_rows($find);
@@ -37,7 +38,7 @@
                     $query= $query_count ." LIMIT {$page_1},$per_page ";
                     $select_posts = mysqli_query($connection,$query);
                     if (mysqli_num_rows($select_posts) == 0){
-                        echo "<h1 class='text-center'>No published posts available.</h1>";
+                        echo "<h1 class='text-center'>No posts available.</h1>";
                     }
                     while ($row = mysqli_fetch_assoc($select_posts)){
                         $post_id = $row['post_id'];
@@ -47,27 +48,21 @@
                         $post_author = $row['author'];
                         $post_content =substr($row['content'],0,100);
                         echo <<<EOT
-  <h1 class="page-header">
-                    Page Heading
-                    <small>Secondary Text</small>
-                </h1>
-
-                <!-- First Blog Post -->
-                <h2>
-                    <a href="/cms/post/{$post_id}">{$post_title}</a>
-                </h2>
-                <p class="lead">
-                    by <a href="/cms/author_posts/{$post_author}">{$post_author}</a>
-                </p>
-                <p><span class="glyphicon glyphicon-time"></span> Posted on {$post_date}</p>
-                <hr>
-                <img class="img-responsive" src="/cms/images/{$post_image}" alt="">
-                <hr>
-                <p>{$post_content}</p>
-                <a class="btn btn-primary" href="/cms/post/{$post_id}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-
-                <hr>
-EOT;
+                                    <!-- Blog Post -->
+                                    <h2>
+                                        <a href="/cms/post/{$post_id}">{$post_title}</a>
+                                    </h2>
+                                    <p class="lead">
+                                        by <a href="/cms/author_posts/{$post_author}">{$post_author}</a>
+                                    </p>
+                                    <p><span class="glyphicon glyphicon-time"></span> Posted on {$post_date}</p>
+                                    <hr>
+                                    <img class="img-responsive" src="/cms/images/{$post_image}" alt="">
+                                    <hr>
+                                    <p>{$post_content}</p>
+                                    <a class="btn btn-primary" href="/cms/post/{$post_id}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                                    <hr>
+                            EOT;
 
                     }
                 ?>

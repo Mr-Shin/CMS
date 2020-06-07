@@ -6,12 +6,7 @@ if (isset($_POST['add_user'])){
     $email = $_POST['email'];
     $password = $_POST['password'];
     $password = password_hash($password, PASSWORD_BCRYPT);
-//    $image = $_FILES['image']['name'];
-//    $tmp_image = $_FILES['image']['tmp_name'];
     $role = $_POST['role'];
-
-
-//    move_uploaded_file($tmp_image,"../images/$image");
 
     $query = "INSERT INTO users (firstname, lastname, username, email, password, role)
               VALUES('{$firstname}','{$lastname}','{$username}','{$email}','{$password}','{$role}')";
@@ -45,11 +40,6 @@ if (isset($_POST['add_user'])){
         <label for="password">Password</label>
         <input type="password" class="form-control" name="password">
     </div>
-<!--    <div class="form-group">-->
-<!--        <label for="image">User Image</label>-->
-<!--        <input type="file" name="image">-->
-<!--    </div>-->
-
     <div class="form-group">
         <label for="role">Role</label>
         <select id="role" name="role">

@@ -85,7 +85,12 @@
                                             <input name="resetPassword" class="btn btn-lg btn-primary btn-block" value="Reset Password" type="submit">
                                         </div>
                                     </form>
+                                    <?php
+                                    if (isset($m)){
+                                    echo "<h4 class=\"alert alert-info\"> {$m}</h4>";
 
+                                    }
+                                    ?>
                                 </div><!-- Body-->
 
                         </div>

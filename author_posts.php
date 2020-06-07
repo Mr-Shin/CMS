@@ -1,4 +1,5 @@
 <?php include "includes/header.php"?>
+<?php include "admin/functions.php"?>
 <body>
 
 <!-- Navigation -->
@@ -13,8 +14,12 @@
         <div class="col-md-8">
             <?php
             $author = $_GET['author'];
-            $query= "SELECT * FROM posts WHERE status = 'published' AND author='{$author}'";
-            $select_posts = mysqli_query($connection,$query);
+            if (is_admin()) {
+                $query = "SELECT * FROM posts WHERE author='{$author}'";
+            } else {
+                $query = "SELECT * FROM posts WHERE author='{$author}' AND status='Published'";
+            }
+           $select_posts = mysqli_query($connection,$query);
             if (mysqli_num_rows($select_posts) == 0){
                 echo "<h1 class='text-center'>No published posts available.</h1>";
             }
@@ -26,12 +31,6 @@
                 $post_author = $row['author'];
                 $post_content =substr($row['content'],0,100);
                 echo <<<EOT
-  <h1 class="page-header">
-                    Page Heading
-                    <small>Secondary Text</small>
-                </h1>
-
-                <!-- First Blog Post -->
                 <h2>
                     <a href="/cms/post/{$post_id}">{$post_title}</a>
                 </h2>

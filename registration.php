@@ -1,7 +1,7 @@
  <?php  include "includes/header.php"; ?>
 <?php include "admin/functions.php";?>
  <?php
- if (isset($_SESSION['username'])){
+ if (isLoggedIn()){
      header('Location: /cms/admin');
      exit;
  }

@@ -7,7 +7,6 @@ function usersOnline()
         if (!$connection){
             session_start();
             include "../includes/db.php";
-
             $session = session_id();
             $time = time();
             $time_to_check = 5;
@@ -16,7 +15,6 @@ function usersOnline()
             $r = mysqli_query($connection, $query);
             $count = mysqli_num_rows($r);
             if ($count == 0) {
-
                 mysqli_query($connection, "INSERT INTO users_online (session, time) VALUES ('$session','$time')");
             } else {
                 mysqli_query($connection, "UPDATE users_online SET time= '$time' WHERE session= '$session'");
@@ -29,12 +27,14 @@ function usersOnline()
     }
 }
 usersOnline();
+
 function queryResult($result){
     global $connection;
     if (!$result){
         die("Query Failed. ".mysqli_error($connection));
     }
 }
+
 function addCategory(){
     global $connection;
     if (isset($_POST['submit'])){
@@ -95,8 +95,7 @@ function findAllCategories(){
 function deleteCategory(){
     global $connection;
     if (isset($_GET['delete'])){
-        if (isset($_SESSION['role'])) {
-            if ($_SESSION['role']=='Admin'){
+        if (is_admin()) {
                 $delete_id=$_GET['delete'];
                 $query = "DELETE FROM categories WHERE id={$delete_id}";
                 $log=mysqli_query($connection,$query);
@@ -108,7 +107,6 @@ function deleteCategory(){
         }
 
     }
-}
 
 function recordCount($table){
     global $connection;
@@ -118,6 +116,7 @@ function recordCount($table){
     $result = mysqli_num_rows($select);
     return $result;
 }
+
 //-------- AUTHENTICATION HELPERS --------//
 function isLoggedIn(){
     if (isset($_SESSION['username'])){
@@ -127,8 +126,9 @@ function isLoggedIn(){
         return false;
     }
 }
-function is_admin($username){
+function is_admin(){
     if (isLoggedIn()){
+        $username = $_SESSION['username'];
         global $connection;
         $query = "SELECT role FROM users WHERE username = '$username'";
         $res = mysqli_query($connection, $query);

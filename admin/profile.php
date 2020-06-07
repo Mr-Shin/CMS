@@ -1,6 +1,6 @@
 <?php include "includes/header.php" ?>
 <?php
-if (isset($_SESSION['username'])) {
+if (isLoggedIn()) {
     $user = $_SESSION['username'];
     $query = "SELECT * FROM users WHERE username = '{$user}'";
     $res = mysqli_query($connection, $query);
@@ -27,21 +27,13 @@ if (isset($_SESSION['username'])) {
         else{
                 $password = $pass;
         }
-        //    $image = $_FILES['image']['name'];
-        //    $tmp_image = $_FILES['image']['tmp_name'];
 
-        //    move_uploaded_file($tmp_image,"../images/$image");
-
-        //    if (empty($image)){
-        //        $image = $post_image;
-        //    }
         $query = "UPDATE users SET ";
         $query .="firstname  = '{$firstname}', ";
         $query .="lastname  = '{$lastname}', ";
         $query .="username = '{$username}', ";
         $query .="email   =  '{$email}', ";
         $query .="password = '{$password}' ";
-        //    $query .="image  = '{$image}' ";
         $query .= "WHERE id = {$user_id} ";
         $res = mysqli_query($connection,$query);
         queryResult($res);
@@ -88,13 +80,6 @@ if (isset($_SESSION['username'])) {
                             <label for="password">Password</label>
                             <input type="password" class="form-control" name="password">
                         </div>
-                        <!--    <div class="form-group">-->
-                        <!--        <label for="image">User Image</label>-->
-                        <!--        <input type="file" name="image">-->
-                        <!--    </div>-->
-
-
-
 
 
                         <div class="form-group">

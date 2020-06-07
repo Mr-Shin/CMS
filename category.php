@@ -14,10 +14,10 @@
         <div class="col-md-8">
             <?php
             if(isset($_GET['id'])) {
-                if (isset($_SESSION['username']) && is_admin($_SESSION['username'])) {
+                if (is_admin()) {
                     $stmt1 =mysqli_prepare($connection,"SELECT post_id, post_title, author, date, image, content FROM posts WHERE category_id=?");
                 } else {
-                    $stmt2 =mysqli_prepare($connection,"SELECT post_id, post_title, author, image, date, content FROM posts WHERE category_id=? AND status=?");
+                    $stmt2 =mysqli_prepare($connection,"SELECT post_id, post_title, author, date, image, content FROM posts WHERE category_id=? AND status=?");
                     $published = "Published";
                 }
                 if(isset($stmt1)){
@@ -33,17 +33,13 @@
                     $stmt = $stmt2;
 
                 }
-//                if (mysqli_stmt_num_rows($stmt) == 0) {
-//                    echo "<h1 class='text-center'>No published posts available.</h1>";
-//                }
+                mysqli_stmt_store_result($stmt);
+                $count = mysqli_stmt_num_rows($stmt);
+                if ($count == 0) {
+                    echo "<h1 class='text-center'>No published posts available.</h1>";
+                }
                     while (mysqli_stmt_fetch($stmt)) {
                         echo <<<EOT
-  <h1 class="page-header">
-                    Page Heading
-                    <small>Secondary Text</small>
-                </h1>
-
-                <!-- First Blog Post -->
                 <h2>
                     <a href="/cms/post/{$post_id}">{$post_title}</a>
                 </h2>

@@ -18,9 +18,7 @@ while ($row = mysqli_fetch_assoc($select_users)) {
     $user_id = $row['id'];
     $user_name = "{$row['firstname']} {$row['lastname']}";
     $username = $row['username'];
-    $password = $row['password'];
     $user_email = $row['email'];
-    $user_image = $row['image'];
     $user_role = $row['role'];
     echo <<<EOT
         <tr>
@@ -63,8 +61,7 @@ if (isset($_GET['role'])){
 
 }
 if (isset($_GET['del'])){
-    if (isset($_SESSION['role'])) {
-        if ($_SESSION['role']=='Admin')
+    if (is_admin()) {
         $id = $_GET['del'];
         $query = "DELETE FROM users WHERE id={$id}";
         $deleteUser = mysqli_query($connection,$query);

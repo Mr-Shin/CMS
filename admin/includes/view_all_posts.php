@@ -1,7 +1,7 @@
 <?php
 if (isset($_POST['deleteBtn'])){
     foreach ($_POST['checkBox'] as $check){
-        $query = "DELETE FROM posts WHERE id={$check}";
+        $query = "DELETE FROM posts WHERE post_id={$check}";
         $deletePosts = mysqli_query($connection,$query);
         queryResult($deletePosts);
         header("Location: posts.php");
@@ -73,17 +73,15 @@ while ($row = mysqli_fetch_assoc($select_posts)) {
 </form>
 <?php
 if (isset($_GET['del'])){
-    if (isset($_SESSION['role'])) {
-        if ($_SESSION['role']=='Admin'){
+        if (is_admin()){
 
             $id = $_GET['del'];
-            $query = "DELETE FROM posts WHERE id={$id}";
+            $query = "DELETE FROM posts WHERE post_id={$id}";
             $deletePost = mysqli_query($connection,$query);
             queryResult($deletePost);
             header("Location: posts.php");
 
         }
-    }
 }
 ?>
 </div>

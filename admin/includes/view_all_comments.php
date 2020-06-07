@@ -36,7 +36,7 @@ while ($row = mysqli_fetch_assoc($select_comments)) {
         $q = "SELECT * from posts WHERE post_id={$comment_post_id}";
         $res = mysqli_query($connection,$q);
         while ($row = mysqli_fetch_assoc($res)){
-            echo "<a href=\"../post.php?id={$row['post_id']}\">{$row['title']}</a>";
+            echo "<a href=\"../post.php?id={$row['post_id']}\">{$row['post_title']}</a>";
         }
                                          echo <<<EOT
                                         </td>
@@ -74,17 +74,13 @@ if (isset($_GET['status'])){
 }
 
 if (isset($_GET['del'])){
-    if (isset($_SESSION['role'])) {
-        if ($_SESSION['role']=='Admin'){
+    if (is_admin()) {
             $id = $_GET['del'];
             $query = "DELETE FROM comments WHERE id={$id}";
             $deleteComment = mysqli_query($connection,$query);
             queryResult($deleteComment);
             header("Location: comments.php");
         }
-    }
-
-
 }
 ?>
                     </div>

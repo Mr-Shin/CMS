@@ -5,6 +5,8 @@
 <!-- Navigation -->
 <?php include "includes/nav.php"?>
 
+
+<!-- Like Related Code -->
 <?php
 if (isLoggedIn()) {
     $user_id = getUserId($_SESSION['username']);
@@ -65,7 +67,7 @@ if (isLoggedIn()) {
             if (isset($_GET['id'])) {
                 $id = $_GET['id'];
 
-                if (isset($_SESSION['role']) && $_SESSION['role'] == "Admin") {
+                if (is_admin()) {
                     $query = "SELECT * FROM posts WHERE post_id={$id}";
                 } else {
                     $query = "SELECT * FROM posts WHERE post_id={$id} AND status='Published'";
@@ -89,7 +91,7 @@ if (isLoggedIn()) {
                     Page Heading
                     <small>Secondary Text</small>
                     EOT;
-                    if (isset($_SESSION['role'])) {
+                    if (is_admin()) {
                         echo "<a href='/cms/admin/posts.php?p=edit-post&id={$id}' class=\"btn btn-primary pull-right\">Edit Post</a>";
                     }
                     echo <<<EOT
@@ -168,7 +170,7 @@ EOT;
             </div>
             <div class="form-group">
                 <label for="comment_email">Email</label>
-                <input type="text" class="form-control" name="comment_email">
+                <input type="email" class="form-control" name="comment_email">
             </div>
             <div class="form-group">
                 <label for="comment_content">Comment</label>
@@ -271,29 +273,7 @@ EOT;
 
 
         });
-        // $(".like").click(function () {
-        //     $.ajax({
-        //         url: "/cms/post.php?id=" + post_id,
-        //         type: "post",
-        //         data:{
-        //             'liked': 1,
-        //             'post_id':post_id,
-        //             'user_id': user_id,
-        //         }
-        //     });
-        // });
-        // $(".unlike").click(function () {
-        //     $.ajax({
-        //         url: "/cms/post.php?id=" + post_id,
-        //         type: "post",
-        //         data:{
-        //             'unliked': 1,
-        //             'post_id':post_id,
-        //             'user_id': user_id,
-        //         },
-        //
-        //     })
-        // })
+
     })
 </script>
 

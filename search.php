@@ -15,7 +15,7 @@
             <?php
             if(isset($_POST['submit'])){
                 $search = $_POST['search'];
-                if (isset($_SESSION['username']) && is_admin($_SESSION['username'])) {
+                if (is_admin()) {
                     $query = "SELECT * FROM posts WHERE post_title LIKE '%$search%'";
                 } else {
                     $query = "SELECT * FROM posts WHERE post_title LIKE '%$search%' AND status='Published'";
@@ -25,17 +25,15 @@
                     while ($row = mysqli_fetch_assoc($search_query)) {
                         $post_id = $row['post_id'];
                         $post_title = $row['post_title'];
-                $post_date = date('F d, Y',strtotime($row['date']));
-                $post_image = $row['image'];
-                $post_author = $row['author'];
-                $post_content = $row['content'];
+                        $post_date = date('F d, Y',strtotime($row['date']));
+                        $post_image = $row['image'];
+                        $post_author = $row['author'];
+                        $post_content = $row['content'];
                 echo <<<EOT
-  <h1 class="page-header">
+                <h1 class="page-header">
                     Page Heading
                     <small>Secondary Text</small>
                 </h1>
-
-                <!-- First Blog Post -->
                 <h2>
                     <a href="/cms/post/{$post_id}">{$post_title}</a>
                 </h2>
@@ -44,13 +42,12 @@
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> Posted on {$post_date}</p>
                 <hr>
-                <img class="img-responsive" src="{$post_image}" alt="">
+                <img class="img-responsive" src="/cms/images/{$post_image}" alt="">
                 <hr>
                 <p>{$post_content}</p>
                 <a class="btn btn-primary" href="/cms/post/{$post_id}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-
                 <hr>
-EOT;
+            EOT;
 
             }
                     }
